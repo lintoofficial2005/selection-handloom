@@ -108,18 +108,18 @@ export const CartPage = ({ onNavigate }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
           
           {/* ITEMS LIST */}
-          <div className="lg:col-span-8 space-y-4">
+          <div className="lg:col-span-8 space-y-3 sm:space-y-4">
             {cart.map((item) => (
               <div
                 key={item.cartId}
-                className="p-5 bg-white rounded-2xl border border-[#E6EDE6] shadow-xs flex flex-col sm:flex-row gap-5 hover:border-[#8DA98F] transition-all"
+                className="p-3.5 sm:p-5 bg-white rounded-2xl border border-[#E6EDE6] shadow-xs flex flex-row gap-3.5 sm:gap-5 hover:border-[#8DA98F] transition-all"
               >
                 <div
                   onClick={() => onNavigate(`product-${item.id}`)}
-                  className="w-full sm:w-28 aspect-square rounded-xl overflow-hidden bg-[#F5EFE6] shrink-0 cursor-pointer"
+                  className="w-20 h-20 sm:w-28 sm:h-28 aspect-square rounded-xl overflow-hidden bg-[#F5EFE6] shrink-0 cursor-pointer"
                 >
                   <SafeImage
                     src={item.image}
@@ -128,55 +128,55 @@ export const CartPage = ({ onNavigate }) => {
                   />
                 </div>
 
-                <div className="flex flex-col justify-between flex-1">
+                <div className="flex flex-col justify-between flex-1 min-w-0">
                   <div>
                     <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <span className="text-[10px] uppercase tracking-wider text-[#739376] font-semibold">
+                      <div className="min-w-0">
+                        <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#739376] font-semibold block truncate">
                           {item.category}
                         </span>
                         <h3
                           onClick={() => onNavigate(`product-${item.id}`)}
-                          className="font-brand-title text-base font-bold text-[#1E2A21] hover:text-[#5B7A5E] transition-colors cursor-pointer"
+                          className="font-brand-title text-sm sm:text-base font-bold text-[#1E2A21] hover:text-[#5B7A5E] transition-colors cursor-pointer line-clamp-1"
                         >
                           {item.name}
                         </h3>
                       </div>
                       <button
                         onClick={() => removeFromCart(item.cartId)}
-                        className="text-stone-400 hover:text-red-600 transition-colors p-1 cursor-pointer"
+                        className="text-stone-400 hover:text-red-600 transition-colors p-1 cursor-pointer shrink-0"
                         title="Remove item"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
 
-                    <p className="text-xs text-[#555C56] mt-1">
+                    <p className="text-[11px] sm:text-xs text-[#555C56] mt-0.5 truncate">
                       Colorway: <strong>{item.color}</strong> • Cut: <strong>{item.dimension}</strong>
                     </p>
                     {item.headerType && (
-                      <p className="text-xs text-[#739376]">
-                        Header Style: {item.headerType}
+                      <p className="text-[10px] sm:text-xs text-[#739376] truncate">
+                        Header: {item.headerType}
                       </p>
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 mt-3 border-t border-[#FAF7F2]">
-                    <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center justify-between pt-2.5 sm:pt-4 mt-2 border-t border-[#FAF7F2] gap-2">
+                    <div className="flex items-center gap-2 sm:gap-4">
                       {/* Quantity */}
-                      <div className="flex items-center border border-[#D0DDD1] rounded-lg bg-[#FAF7F2] px-2 py-1">
+                      <div className="flex items-center border border-[#D0DDD1] rounded-lg bg-[#FAF7F2] px-1.5 py-0.5 sm:px-2 sm:py-1">
                         <button
                           onClick={() => updateQuantity(item.cartId, item.quantity - 1)}
-                          className="w-6 text-sm font-bold text-[#555C56] hover:text-[#243528] cursor-pointer"
+                          className="w-5 sm:w-6 text-sm font-bold text-[#555C56] hover:text-[#243528] cursor-pointer"
                         >
                           -
                         </button>
-                        <span className="w-8 text-center text-xs font-semibold text-[#243528]">
+                        <span className="w-6 sm:w-8 text-center text-xs font-semibold text-[#243528]">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(item.cartId, item.quantity + 1)}
-                          className="w-6 text-sm font-bold text-[#555C56] hover:text-[#243528] cursor-pointer"
+                          className="w-5 sm:w-6 text-sm font-bold text-[#555C56] hover:text-[#243528] cursor-pointer"
                         >
                           +
                         </button>
@@ -184,13 +184,13 @@ export const CartPage = ({ onNavigate }) => {
 
                       <button
                         onClick={() => handleSaveForLater(item)}
-                        className="text-xs text-[#5B7A5E] hover:underline font-medium cursor-pointer"
+                        className="text-[11px] sm:text-xs text-[#5B7A5E] hover:underline font-medium cursor-pointer"
                       >
-                        Save to Wishlist
+                        Save
                       </button>
                     </div>
 
-                    <span className="font-sans text-base font-bold text-[#1E2A21]">
+                    <span className="font-sans text-sm sm:text-base font-bold text-[#1E2A21]">
                       ₹{(item.price * item.quantity).toLocaleString('en-IN')}
                     </span>
                   </div>
@@ -201,7 +201,7 @@ export const CartPage = ({ onNavigate }) => {
 
           {/* ORDER SUMMARY */}
           <div className="lg:col-span-4">
-            <div className="bg-white p-6 rounded-2xl border border-[#D0DDD1] space-y-6 sticky top-28 shadow-xs">
+            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-[#D0DDD1] space-y-4 sm:space-y-6 sticky top-24 shadow-xs">
               
               <h3 className="font-brand-title text-base font-bold text-[#1E2A21] uppercase tracking-wider border-b border-[#E6EDE6] pb-3">
                 Order Summary

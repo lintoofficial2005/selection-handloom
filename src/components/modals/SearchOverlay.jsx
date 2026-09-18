@@ -32,38 +32,39 @@ export const SearchOverlay = ({ onNavigate }) => {
   const popularTags = ['Botanical Linen', 'Timber Blinds', 'Hand-Block Cushions', 'Merino Wool', 'Silk Jacquard', 'Blackout Drapes'];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-[#1E2A21]/70 backdrop-blur-md pt-16 sm:pt-24 px-4">
-      <div className="bg-[#FAF7F2] w-full max-w-3xl rounded-2xl shadow-2xl border border-[#D0DDD1] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-[#FAF7F2] sm:bg-[#1E2A21]/70 sm:backdrop-blur-md pt-0 sm:pt-20 px-0 sm:px-4">
+      <div className="bg-[#FAF7F2] w-full h-full sm:h-auto sm:max-w-3xl sm:rounded-2xl shadow-2xl border-none sm:border border-[#D0DDD1] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
         
         {/* SEARCH HEADER INPUT */}
-        <div className="p-6 border-b border-[#E6EDE6] flex items-center gap-4 bg-white">
-          <Search className="w-6 h-6 text-[#5B7A5E] shrink-0" />
+        <div className="p-3.5 sm:p-5 border-b border-[#E6EDE6] flex items-center gap-3 bg-white pt-safe">
+          <Search className="w-5 h-5 sm:w-6 sm:h-6 text-[#5B7A5E] shrink-0" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search curtains, timber blinds, pure linen, silk suiting..."
-            className="w-full text-base sm:text-lg bg-transparent border-none outline-none text-[#243528] placeholder:text-[#555C56]/60 font-sans"
+            placeholder="Search curtains, timber blinds, pure linen..."
+            className="w-full text-sm sm:text-lg bg-transparent border-none outline-none text-[#243528] placeholder:text-[#555C56]/60 font-sans"
           />
           {query && (
             <button
               onClick={() => setQuery('')}
-              className="text-xs text-[#555C56] hover:text-[#243528] px-2 py-1 bg-[#F5EFE6] rounded-md cursor-pointer"
+              className="text-xs text-[#555C56] hover:text-[#243528] px-2 py-1 bg-[#F5EFE6] rounded-md cursor-pointer shrink-0"
             >
               Clear
             </button>
           )}
           <button
             onClick={closeSearch}
-            className="p-2 text-[#555C56] hover:text-[#243528] hover:bg-[#F5EFE6] rounded-full transition-colors cursor-pointer"
+            className="w-9 h-9 flex items-center justify-center text-[#555C56] hover:text-[#243528] hover:bg-[#F5EFE6] active:bg-[#E6EDE6] rounded-full transition-colors cursor-pointer shrink-0"
+            aria-label="Close search"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* SEARCH BODY */}
-        <div className="p-6 max-h-[65vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 flex-1 overflow-y-auto max-h-[calc(100vh-80px)] sm:max-h-[65vh] pb-safe">
           {query.trim() === '' ? (
             <div className="space-y-6">
               <div>

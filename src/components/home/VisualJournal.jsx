@@ -32,16 +32,16 @@ export const VisualJournal = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#FAF7F2]">
+    <section className="py-12 sm:py-20 bg-[#FAF7F2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-3">
           <div>
-            <span className="text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
               ATMOSPHERE &amp; WEAVES
             </span>
-            <h2 className="font-editorial text-3xl sm:text-4xl font-light text-[#1E2A21]">
+            <h2 className="font-editorial text-2xl sm:text-4xl font-light text-[#1E2A21]">
               The Visual Journal
             </h2>
           </div>
@@ -49,7 +49,7 @@ export const VisualJournal = () => {
             href="https://instagram.com"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#243528] hover:text-[#5B7A5E] font-semibold transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[#243528] hover:text-[#5B7A5E] font-semibold transition-colors cursor-pointer py-1"
           >
             <InstagramIcon className="w-4 h-4 text-[#739376]" />
             <span>Follow Our Journey @selectionhandloom</span>
@@ -57,7 +57,7 @@ export const VisualJournal = () => {
         </div>
 
         {/* 5-COLUMN GALLERY STRIP */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {moments.map((m, idx) => (
             <div
               key={idx}
@@ -68,12 +68,13 @@ export const VisualJournal = () => {
                 alt={m.title}
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A21]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white" />
-              <div className="absolute bottom-3 left-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-[9px] uppercase tracking-wider text-[#AEC4B0] font-semibold block">
+              {/* Subtle permanent gradient on mobile, darker on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1E2A21]/80 via-transparent to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 text-white">
+                <span className="text-[8px] sm:text-[9px] uppercase tracking-wider text-[#AEC4B0] font-semibold block truncate">
                   {m.category}
                 </span>
-                <span className="font-brand-title text-xs font-bold leading-tight block">
+                <span className="font-brand-title text-[11px] sm:text-xs font-bold leading-tight block line-clamp-2">
                   {m.title}
                 </span>
               </div>

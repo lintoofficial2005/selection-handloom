@@ -81,23 +81,23 @@ export const AccountPage = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="py-12 bg-[#FAF7F2] min-h-screen animate-in fade-in duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-6 sm:py-12 bg-[#FAF7F2] min-h-screen animate-in fade-in duration-300">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         
         {/* HEADER */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-[#D0DDD1]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b border-[#D0DDD1]">
           <div>
-            <span className="text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
+            <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
               ESTD. 1950 • MEERUT
             </span>
-            <h1 className="font-editorial text-3xl sm:text-4xl font-light text-[#1E2A21]">
+            <h1 className="font-editorial text-2xl sm:text-4xl font-light text-[#1E2A21]">
               Customer Concierge Account
             </h1>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="w-full sm:w-auto">
             <button
               onClick={openConsultation}
-              className="px-4 py-2 bg-white border border-[#739376] text-[#243528] rounded-xl text-xs font-semibold hover:bg-[#E6EDE6] cursor-pointer"
+              className="w-full sm:w-auto px-4 py-2.5 bg-white border border-[#739376] text-[#243528] rounded-xl text-xs font-semibold hover:bg-[#E6EDE6] active:bg-[#E6EDE6] cursor-pointer text-center shadow-xs"
             >
               Book In-Store / At-Home Consultation
             </button>
@@ -105,35 +105,35 @@ export const AccountPage = ({ onNavigate }) => {
         </div>
 
         {/* 2-COLUMN LAYOUT: TABS & CONTENT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
           
-          {/* SIDEBAR TABS */}
-          <div className="lg:col-span-3 space-y-2">
+          {/* TABS (SCROLLABLE ROW ON MOBILE, STACKED ON DESKTOP) */}
+          <div className="lg:col-span-3 flex lg:flex-col overflow-x-auto gap-2 pb-2 lg:pb-0">
             {[
-              { id: 'orders', label: 'Order History & Tracking', icon: Package },
-              { id: 'wishlist', label: `Saved Wishlist (${wishlistProducts.length})`, icon: Heart },
-              { id: 'addresses', label: 'Delivery Residences', icon: MapPin },
-              { id: 'profile', label: 'Textile Preferences', icon: User },
+              { id: 'orders', label: 'Order History', icon: Package },
+              { id: 'wishlist', label: `Wishlist (${wishlistProducts.length})`, icon: Heart },
+              { id: 'addresses', label: 'Residences', icon: MapPin },
+              { id: 'profile', label: 'Preferences', icon: User },
             ].map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full text-left p-3.5 rounded-xl text-xs font-semibold tracking-wider flex items-center gap-3 transition-all cursor-pointer ${
+                  className={`shrink-0 lg:shrink whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left py-2.5 px-3.5 sm:p-3.5 rounded-xl text-xs font-semibold tracking-wider flex items-center gap-2 sm:gap-3 transition-all cursor-pointer ${
                     activeTab === tab.id
                       ? 'bg-[#243528] text-white shadow-xs'
                       : 'bg-white text-[#3A403B] hover:bg-[#E6EDE6] border border-[#E6EDE6]'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span>{tab.label}</span>
                 </button>
               );
             })}
 
             {/* MEERUT SHOWROOM CONTACT CARD */}
-            <div className="p-4 bg-white rounded-2xl border border-[#D0DDD1] space-y-2 mt-6">
+            <div className="hidden lg:block p-4 bg-white rounded-2xl border border-[#D0DDD1] space-y-2 mt-6">
               <span className="text-[10px] uppercase tracking-wider text-[#739376] font-bold block">
                 Direct Master Weaver Concierge
               </span>

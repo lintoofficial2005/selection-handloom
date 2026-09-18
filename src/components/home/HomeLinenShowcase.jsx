@@ -4,24 +4,24 @@ import { ArrowRight } from 'lucide-react';
 
 export const HomeLinenShowcase = ({ onNavigate }) => {
   return (
-    <section className="py-20 bg-[#FAF7F2]">
+    <section className="py-12 sm:py-20 bg-[#FAF7F2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* SECTION HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
             BED &amp; LIVING SANCTUARIES
           </span>
-          <h2 className="font-editorial text-3xl sm:text-5xl font-light text-[#1E2A21]">
+          <h2 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-light text-[#1E2A21]">
             Heirloom Home Linen
           </h2>
-          <p className="text-xs sm:text-sm text-[#555C56] mt-2">
+          <p className="text-xs sm:text-sm text-[#555C56] mt-2 max-w-md mx-auto">
             Textiles that invite pause. Hand-block stamped cushion sets, deep waffle bedcovers, and pure cashmere throws.
           </p>
         </div>
 
         {/* 3 EDITORIAL CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
           
           <div className="bg-white rounded-2xl overflow-hidden border border-[#D0DDD1] shadow-xs group">
             <div className="aspect-4/3 overflow-hidden bg-[#F5EFE6]">
@@ -31,11 +31,11 @@ export const HomeLinenShowcase = ({ onNavigate }) => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
-            <div className="p-6 space-y-2">
+            <div className="p-5 sm:p-6 space-y-1.5 sm:space-y-2">
               <span className="text-[10px] uppercase tracking-wider text-[#739376] font-bold">
                 Hand-Stamped Minerals
               </span>
-              <h4 className="font-brand-title text-lg font-bold text-[#243528]">
+              <h4 className="font-brand-title text-base sm:text-lg font-bold text-[#243528]">
                 Hand-Block Cushion Sets
               </h4>
               <p className="text-xs text-[#555C56] leading-relaxed">
@@ -52,11 +52,11 @@ export const HomeLinenShowcase = ({ onNavigate }) => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
-            <div className="p-6 space-y-2">
+            <div className="p-5 sm:p-6 space-y-1.5 sm:space-y-2">
               <span className="text-[10px] uppercase tracking-wider text-[#739376] font-bold">
                 Thermoregulating Flax
               </span>
-              <h4 className="font-brand-title text-lg font-bold text-[#243528]">
+              <h4 className="font-brand-title text-base sm:text-lg font-bold text-[#243528]">
                 Waffle Linen Bedcovers
               </h4>
               <p className="text-xs text-[#555C56] leading-relaxed">
@@ -73,11 +73,11 @@ export const HomeLinenShowcase = ({ onNavigate }) => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
-            <div className="p-6 space-y-2">
+            <div className="p-5 sm:p-6 space-y-1.5 sm:space-y-2">
               <span className="text-[10px] uppercase tracking-wider text-[#739376] font-bold">
                 Tussar Silk &amp; Zari
               </span>
-              <h4 className="font-brand-title text-lg font-bold text-[#243528]">
+              <h4 className="font-brand-title text-base sm:text-lg font-bold text-[#243528]">
                 Artisanal Table Runners
               </h4>
               <p className="text-xs text-[#555C56] leading-relaxed">
@@ -88,10 +88,10 @@ export const HomeLinenShowcase = ({ onNavigate }) => {
 
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 sm:mt-12 text-center">
           <button
             onClick={() => onNavigate('category-home-linen')}
-            className="inline-flex items-center gap-2 px-7 py-3 bg-[#243528] text-white rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-[#3D503F] transition-all cursor-pointer shadow-sm"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#243528] text-white rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-[#3D503F] transition-all cursor-pointer shadow-sm"
           >
             <span>Explore All Home Linen</span>
             <ArrowRight className="w-4 h-4" />

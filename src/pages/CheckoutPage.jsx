@@ -163,20 +163,20 @@ export const CheckoutPage = ({ onNavigate }) => {
   }
 
   return (
-    <div className="py-12 bg-[#FAF7F2] min-h-screen animate-in fade-in duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="py-6 sm:py-12 bg-[#FAF7F2] min-h-screen animate-in fade-in duration-300">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         
         {/* CHECKOUT HEADER & STEP TRACKER */}
-        <div className="max-w-3xl mx-auto mb-10 text-center space-y-4">
-          <span className="text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block">
+        <div className="max-w-3xl mx-auto mb-6 sm:mb-10 text-center space-y-3 sm:space-y-4">
+          <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block">
             ESTD. 1950 • SELECTION SECURE CHECKOUT
           </span>
-          <h1 className="font-editorial text-3xl sm:text-4xl font-light text-[#1E2A21]">
+          <h1 className="font-editorial text-2xl sm:text-4xl font-light text-[#1E2A21]">
             Complete Your Order
           </h1>
 
-          {/* STEPPER PILLS */}
-          <div className="flex items-center justify-center gap-2 sm:gap-4 pt-2">
+          {/* STEPPER PILLS — COMPACT & HORIZONTALLY SCROLLABLE ON MOBILE */}
+          <div className="flex items-center justify-start sm:justify-center gap-1.5 sm:gap-3 pt-2 overflow-x-auto pb-1">
             {[
               { id: 1, label: '1. Contact' },
               { id: 2, label: '2. Address' },
@@ -185,7 +185,7 @@ export const CheckoutPage = ({ onNavigate }) => {
             ].map((s) => (
               <div
                 key={s.id}
-                className={`text-xs px-3.5 py-1.5 rounded-full font-semibold transition-all ${
+                className={`text-[10px] sm:text-xs px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full font-semibold whitespace-nowrap transition-all shrink-0 ${
                   step === s.id
                     ? 'bg-[#243528] text-white shadow-xs'
                     : step > s.id
@@ -199,16 +199,16 @@ export const CheckoutPage = ({ onNavigate }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
           
           {/* LEFT: STEP FORMS */}
-          <div className="lg:col-span-8 bg-white p-6 sm:p-8 rounded-3xl border border-[#D0DDD1] shadow-xs space-y-6">
+          <div className="lg:col-span-8 bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-[#D0DDD1] shadow-xs space-y-5 sm:space-y-6">
             
             {/* STEP 1: CONTACT */}
             {step === 1 && (
-              <div className="space-y-5 animate-in fade-in duration-300">
+              <div className="space-y-4 sm:space-y-5 animate-in fade-in duration-300">
                 <div className="border-b border-[#E6EDE6] pb-3">
-                  <h3 className="font-brand-title text-lg font-bold text-[#1E2A21]">
+                  <h3 className="font-brand-title text-base sm:text-lg font-bold text-[#1E2A21]">
                     Contact &amp; Notification Details
                   </h3>
                   <p className="text-xs text-[#555C56]">
@@ -216,36 +216,36 @@ export const CheckoutPage = ({ onNavigate }) => {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#3A403B] font-semibold mb-1">
+                    <label className="block text-[11px] sm:text-xs uppercase tracking-wider text-[#3A403B] font-semibold mb-1">
                       Email Address *
                     </label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-[#D0DDD1] bg-[#FAF7F2] text-xs text-[#243528] focus:border-[#243528] outline-none"
+                      className="w-full px-3.5 py-3 rounded-xl border border-[#D0DDD1] bg-[#FAF7F2] text-xs sm:text-sm text-[#243528] focus:border-[#243528] outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#3A403B] font-semibold mb-1">
+                    <label className="block text-[11px] sm:text-xs uppercase tracking-wider text-[#3A403B] font-semibold mb-1">
                       Phone Number (for SMS &amp; WhatsApp Tracker) *
                     </label>
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-2.5 rounded-xl border border-[#D0DDD1] bg-[#FAF7F2] text-xs text-[#243528] focus:border-[#243528] outline-none"
+                      className="w-full px-3.5 py-3 rounded-xl border border-[#D0DDD1] bg-[#FAF7F2] text-xs sm:text-sm text-[#243528] focus:border-[#243528] outline-none"
                     />
                   </div>
                 </div>
 
-                <div className="pt-4 flex justify-end">
+                <div className="pt-3 sm:pt-4 flex justify-end">
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="px-8 py-3.5 bg-[#243528] text-white rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-[#3D503F] transition-all flex items-center gap-2 cursor-pointer"
+                    className="w-full sm:w-auto px-8 py-3.5 bg-[#243528] text-white rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-[#3D503F] active:bg-[#3D503F] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                   >
                     <span>Continue to Address</span>
                     <ArrowRight className="w-4 h-4" />

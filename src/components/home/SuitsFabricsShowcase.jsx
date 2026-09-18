@@ -3,19 +3,19 @@ import { ArrowRight, Scissors } from 'lucide-react';
 
 export const SuitsFabricsShowcase = ({ onNavigate }) => {
   return (
-    <section className="py-20 bg-[#1E2A21] text-[#FAF7F2] border-t border-[#334335]">
+    <section className="py-12 sm:py-20 bg-[#1E2A21] text-[#FAF7F2] border-t border-[#334335]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT: EDITORIAL COPY */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#29382C] border border-[#8DA98F]/30 text-[#AEC4B0] text-xs font-semibold uppercase tracking-widest">
               <Scissors className="w-3.5 h-3.5" />
               Sartorial Masterhouse
             </div>
 
-            <h2 className="font-editorial text-3xl sm:text-5xl font-light leading-tight">
+            <h2 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-light leading-tight">
               Fabrics of Noble Drape &amp; <br />
               <span className="italic font-normal text-[#AEC4B0]">Enduring Character.</span>
             </h2>
@@ -24,9 +24,9 @@ export const SuitsFabricsShowcase = ({ onNavigate }) => {
               Selection Handloom’s suiting legacy traces back to bespoke tailoring masters in 1950. We curate unstitched fabric lengths in Himalayan Merino cashmere wool, hand-reeled Matka raw silk, and Super 140s worsted weaves for wedding bandhgalas, tuxedos, and sherwanis.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-xl bg-[#29382C]/80 border border-[#3D503F]">
-                <span className="text-xs uppercase tracking-wider text-[#AEC4B0] font-bold block mb-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1 sm:pt-2">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#29382C]/80 border border-[#3D503F]">
+                <span className="text-[11px] sm:text-xs uppercase tracking-wider text-[#AEC4B0] font-bold block mb-0.5 sm:mb-1">
                   Merino Cashmere Twill
                 </span>
                 <p className="text-[11px] text-[#FAF7F2]/70">
@@ -34,8 +34,8 @@ export const SuitsFabricsShowcase = ({ onNavigate }) => {
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#29382C]/80 border border-[#3D503F]">
-                <span className="text-xs uppercase tracking-wider text-[#AEC4B0] font-bold block mb-1">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-[#29382C]/80 border border-[#3D503F]">
+                <span className="text-[11px] sm:text-xs uppercase tracking-wider text-[#AEC4B0] font-bold block mb-0.5 sm:mb-1">
                   Raw Matka Khadi
                 </span>
                 <p className="text-[11px] text-[#FAF7F2]/70">
@@ -47,7 +47,7 @@ export const SuitsFabricsShowcase = ({ onNavigate }) => {
             <div className="pt-2">
               <button
                 onClick={() => onNavigate('category-suits')}
-                className="px-7 py-3.5 bg-[#FAF7F2] text-[#1E2A21] rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-[#E6EDE6] transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                className="w-full sm:w-auto px-7 py-3.5 bg-[#FAF7F2] text-[#1E2A21] rounded-xl text-xs uppercase tracking-widest font-semibold hover:bg-[#E6EDE6] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
               >
                 <span>Explore Suiting Cuts</span>
                 <ArrowRight className="w-4 h-4" />
@@ -64,16 +64,16 @@ export const SuitsFabricsShowcase = ({ onNavigate }) => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#141C16]/80 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-[#1E2A21]/90 backdrop-blur-md border border-[#8DA98F]/30 flex items-center justify-between">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-3 sm:p-4 rounded-xl bg-[#1E2A21]/90 backdrop-blur-md border border-[#8DA98F]/30 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] uppercase tracking-widest text-[#AEC4B0] font-semibold block">
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#AEC4B0] font-semibold block">
                     Unstitched Fabric Lengths
                   </span>
-                  <span className="font-brand-title text-sm font-bold text-white">
+                  <span className="font-brand-title text-xs sm:text-sm font-bold text-white">
                     3.0m to 4.5m Cuts Available
                   </span>
                 </div>
-                <span className="text-xs text-[#FAF7F2]/80 font-sans font-semibold">
+                <span className="text-[11px] sm:text-xs text-[#FAF7F2]/80 font-sans font-semibold">
                   From ₹5,200
                 </span>
               </div>

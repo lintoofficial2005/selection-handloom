@@ -97,3 +97,30 @@ html, body {
   color: #745729;
 }
 
+/* Mobile-first safe areas & utilities */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 16px);
+}
+
+/* Touch active state feedback */
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active {
+    opacity: 0.85;
+    transform: scale(0.985);
+  }
+}
+
+/* Balanced text wrapping for headings */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Touch-action and no tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
