@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeroSection } from '../components/home/HeroSection';
+import { HeritageMarquee } from '../components/home/HeritageMarquee';
 import { CategoryBento } from '../components/home/CategoryBento';
 import { NewArrivals } from '../components/home/NewArrivals';
 import { CurtainSpotlight } from '../components/home/CurtainSpotlight';
@@ -19,38 +20,41 @@ export const HomePage = ({ onNavigate }) => {
       {/* 1. HERO */}
       <HeroSection onNavigate={onNavigate} />
 
-      {/* 2. SHOP BY CATEGORY ("Explore Our Collections") */}
+      {/* 2. RESTRAINED EDITORIAL HERITAGE MARQUEE */}
+      <HeritageMarquee />
+
+      {/* 3. SHOP BY CATEGORY ("Explore Our Collections") */}
       <CategoryBento onNavigate={onNavigate} />
 
-      {/* 3. NEW ARRIVALS */}
+      {/* 4. NEW ARRIVALS */}
       <NewArrivals onNavigate={onNavigate} />
 
-      {/* 4. HOME FURNISHINGS: CURTAINS (Stitched vs Unstitched) */}
+      {/* 5. HOME FURNISHINGS: CURTAINS (Stitched vs Unstitched) */}
       <CurtainSpotlight onNavigate={onNavigate} />
 
-      {/* 5. HOME FURNISHINGS: HEIRLOOM BEDDING & SOFT FURNISHINGS */}
+      {/* 6. HOME FURNISHINGS: HEIRLOOM BEDDING & SOFT FURNISHINGS */}
       <HomeLinenShowcase onNavigate={onNavigate} />
 
-      {/* 6. COLOURFUL TEXTILE / BRAND STORY */}
+      {/* 7. COLOURFUL TEXTILE / BRAND STORY */}
       <TextileExperience />
 
-      {/* 7. LADIES' SUITS (UNSTITCHED SILKS & FABRICS) */}
+      {/* 8. LADIES' SUITS (UNSTITCHED SILKS & FABRICS) */}
       <SuitsFabricsShowcase onNavigate={onNavigate} />
 
-      {/* 8. HERITAGE INTRO & 75-YEAR TIMELINE */}
+      {/* 9. HERITAGE INTRO & 75-YEAR TIMELINE */}
       <HeritageIntro onNavigate={onNavigate} />
       <HeritageTimeline onNavigate={onNavigate} />
 
-      {/* 9. WHY SELECTION HANDLOOM */}
+      {/* 10. WHY SELECTION HANDLOOM */}
       <WhySelection />
 
-      {/* 10. PHYSICAL STORE EXPERIENCE */}
+      {/* 11. PHYSICAL STORE EXPERIENCE */}
       <StoreExperience onNavigate={onNavigate} />
 
-      {/* 11. VISUAL JOURNAL */}
+      {/* 12. VISUAL JOURNAL */}
       <VisualJournal />
 
-      {/* 12. NEWSLETTER */}
+      {/* 13. NEWSLETTER */}
       <Newsletter />
     </div>
   );

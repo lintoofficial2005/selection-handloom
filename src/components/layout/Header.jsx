@@ -113,18 +113,21 @@ export const Header = ({ currentRoute, onNavigate }) => {
               </button>
             </div>
 
-            {/* DESKTOP NAVIGATION */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
+            {/* DESKTOP NAVIGATION WITH CENTER-EXPANDING LUXURY UNDERLINE */}
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
               {/* HOME */}
               <button
                 onClick={() => onNavigate('home')}
-                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
-                  currentRoute === 'home'
-                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
-                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                className={`relative py-1 text-xs uppercase tracking-[0.20em] font-medium transition-colors duration-200 cursor-pointer group ${
+                  currentRoute === 'home' ? 'text-[#243528] font-bold' : 'text-[#3A403B] hover:text-[#243528]'
                 }`}
               >
-                HOME
+                <span>HOME</span>
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#5B7A5E] transition-all duration-300 ease-out ${
+                    currentRoute === 'home' ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
               </button>
 
               {/* HOME FURNISHINGS MEGA DROPDOWN */}
@@ -135,18 +138,29 @@ export const Header = ({ currentRoute, onNavigate }) => {
               >
                 <button
                   onClick={() => onNavigate('category-home-furnishings')}
-                  className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer flex items-center gap-1 ${
+                  className={`relative py-1 text-xs uppercase tracking-[0.20em] font-medium transition-colors duration-200 cursor-pointer flex items-center gap-1 group ${
                     currentRoute.includes('bedding') || 
                     currentRoute.includes('curtains') || 
                     currentRoute.includes('bath') || 
                     currentRoute.includes('soft') || 
                     currentRoute === 'category-home-furnishings'
-                      ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
-                      : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                      ? 'text-[#243528] font-bold'
+                      : 'text-[#3A403B] hover:text-[#243528]'
                   }`}
                 >
                   <span>HOME FURNISHINGS</span>
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isFurnishingsHovered ? 'rotate-180 text-[#5B7A5E]' : 'opacity-60'}`} />
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#5B7A5E] transition-all duration-300 ease-out ${
+                      currentRoute.includes('bedding') || 
+                      currentRoute.includes('curtains') || 
+                      currentRoute.includes('bath') || 
+                      currentRoute.includes('soft') || 
+                      currentRoute === 'category-home-furnishings'
+                        ? 'w-full'
+                        : 'w-0 group-hover:w-full'
+                    }`}
+                  />
                 </button>
 
                 {/* MEGA MENU CONTAINER */}
@@ -196,50 +210,66 @@ export const Header = ({ currentRoute, onNavigate }) => {
               {/* LADIES' SUITS */}
               <button
                 onClick={() => onNavigate('category-suits')}
-                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                className={`relative py-1 text-xs uppercase tracking-[0.20em] font-medium transition-colors duration-200 cursor-pointer group ${
                   currentRoute === 'category-suits' || currentRoute === 'category-ladies-suits'
-                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
-                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                    ? 'text-[#243528] font-bold'
+                    : 'text-[#3A403B] hover:text-[#243528]'
                 }`}
               >
-                LADIES' SUITS
+                <span>LADIES' SUITS</span>
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#5B7A5E] transition-all duration-300 ease-out ${
+                    currentRoute === 'category-suits' || currentRoute === 'category-ladies-suits'
+                      ? 'w-full'
+                      : 'w-0 group-hover:w-full'
+                  }`}
+                />
               </button>
 
               {/* NEW ARRIVALS */}
               <button
                 onClick={() => onNavigate('new-arrivals')}
-                className={`text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                  currentRoute === 'new-arrivals'
-                    ? 'text-[#C86D51] font-bold border-b-2 border-[#C86D51] pb-1'
-                    : 'text-[#C86D51] hover:text-[#9E4A32]'
+                className={`relative py-1 text-xs uppercase tracking-[0.20em] font-bold transition-colors duration-200 cursor-pointer flex items-center gap-1.5 group ${
+                  currentRoute === 'new-arrivals' ? 'text-[#D96C4A]' : 'text-[#D96C4A] hover:text-[#B85333]'
                 }`}
               >
                 <Sparkles className="w-3 h-3 text-[#D99B26]" />
                 <span>NEW ARRIVALS</span>
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#D96C4A] transition-all duration-300 ease-out ${
+                    currentRoute === 'new-arrivals' ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
               </button>
 
               {/* ABOUT US */}
               <button
                 onClick={() => onNavigate('about')}
-                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
-                  currentRoute === 'about'
-                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
-                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                className={`relative py-1 text-xs uppercase tracking-[0.20em] font-medium transition-colors duration-200 cursor-pointer group ${
+                  currentRoute === 'about' ? 'text-[#243528] font-bold' : 'text-[#3A403B] hover:text-[#243528]'
                 }`}
               >
-                ABOUT US
+                <span>ABOUT US</span>
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#5B7A5E] transition-all duration-300 ease-out ${
+                    currentRoute === 'about' ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
               </button>
 
               {/* CONTACT */}
               <button
                 onClick={() => onNavigate('contact')}
-                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
-                  currentRoute === 'contact'
-                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
-                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                className={`relative py-1 text-xs uppercase tracking-[0.20em] font-medium transition-colors duration-200 cursor-pointer group ${
+                  currentRoute === 'contact' ? 'text-[#243528] font-bold' : 'text-[#3A403B] hover:text-[#243528]'
                 }`}
               >
-                CONTACT
+                <span>CONTACT</span>
+                <span
+                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#5B7A5E] transition-all duration-300 ease-out ${
+                    currentRoute === 'contact' ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
               </button>
             </nav>
 
@@ -247,7 +277,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
             <div className="flex items-center gap-1 sm:gap-2.5 lg:gap-3.5">
               <button
                 onClick={openConsultation}
-                className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase tracking-wider font-semibold border border-[#739376] text-[#243528] bg-[#E6EDE6]/60 hover:bg-[#739376] hover:text-white transition-all cursor-pointer shadow-xs"
+                className="hidden xl:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] uppercase tracking-wider font-semibold border border-[#739376] text-[#243528] bg-[#E6EDE6]/60 hover:bg-[#739376] hover:text-white transition-all duration-300 cursor-pointer shadow-xs"
               >
                 <Calendar className="w-3 h-3 text-[#5B7A5E]" />
                 <span>Book Consultation</span>
@@ -255,7 +285,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
 
               <button
                 onClick={openSearch}
-                className="w-10 h-10 rounded-full flex items-center justify-center text-[#243528] hover:text-[#5B7A5E] active:bg-[#E6EDE6] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full flex items-center justify-center text-[#243528] hover:text-[#5B7A5E] hover:bg-[#E6EDE6]/60 active:bg-[#E6EDE6] transition-colors cursor-pointer"
                 aria-label="Search Collection"
               >
                 <Search className="w-5 h-5" />
@@ -276,7 +306,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
               >
                 <Heart className="w-5 h-5" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#C86D51] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#D96C4A] text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
                     {wishlistCount}
                   </span>
                 )}
@@ -448,14 +478,14 @@ export const Header = ({ currentRoute, onNavigate }) => {
               <button
                 onClick={() => handleNavClick('new-arrivals')}
                 className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.18em] font-bold flex items-center justify-between transition-colors ${
-                  currentRoute === 'new-arrivals' ? 'bg-[#FBEBE6] text-[#C86D51]' : 'text-[#C86D51] hover:bg-stone-100'
+                  currentRoute === 'new-arrivals' ? 'bg-[#FBEBE6] text-[#D96C4A]' : 'text-[#D96C4A] hover:bg-stone-100'
                 }`}
               >
                 <div className="flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-[#D99B26]" />
                   <span>NEW ARRIVALS</span>
                 </div>
-                <span className="text-[9px] bg-[#C86D51] text-white px-2 py-0.5 rounded-full font-bold uppercase">
+                <span className="text-[9px] bg-[#D96C4A] text-white px-2 py-0.5 rounded-full font-bold uppercase">
                   Fresh
                 </span>
               </button>
@@ -498,7 +528,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
                   <Heart className="w-4 h-4 text-[#5B7A5E]" />
                   <span>Wishlist</span>
                   {wishlistCount > 0 && (
-                    <span className="w-4 h-4 bg-[#C86D51] text-white text-[9px] font-bold rounded-full flex items-center justify-center ml-1">
+                    <span className="w-4 h-4 bg-[#D96C4A] text-white text-[9px] font-bold rounded-full flex items-center justify-center ml-1">
                       {wishlistCount}
                     </span>
                   )}

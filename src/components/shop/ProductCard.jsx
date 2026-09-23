@@ -48,19 +48,19 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
           <SafeImage
             src={isHovered ? hoverImage : currentImage}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
           {product.isNew && (
-            <span className="absolute top-2.5 left-2.5 bg-[#C86D51] text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold shadow-xs">
+            <span className="absolute top-2.5 left-2.5 bg-[#D96C4A] text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-full font-bold shadow-xs">
               NEW
             </span>
           )}
           <button
             onClick={handleWishlistToggle}
-            className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-[#243528] active:scale-90 shadow-xs cursor-pointer"
+            className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-[#243528] active:scale-90 shadow-xs cursor-pointer hover:scale-105 transition-transform"
             aria-label="Toggle Wishlist"
           >
-            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#C86D51] text-[#C86D51]' : ''}`} />
+            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#D96C4A] text-[#D96C4A]' : ''}`} />
           </button>
         </div>
 
@@ -80,11 +80,11 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
               )}
             </div>
 
-            <h3 className="font-brand-title text-sm sm:text-lg font-semibold text-[#1E2A21] group-hover:text-[#5B7A5E] transition-colors mb-1">
+            <h3 className="font-brand-title text-sm sm:text-lg font-semibold text-[#1E2A21] group-hover:text-[#5B7A5E] transition-colors mb-1 tracking-wide">
               {product.name}
             </h3>
 
-            <p className="text-xs text-[#555C56] line-clamp-2 mb-2 sm:mb-3">
+            <p className="text-xs text-[#555C56] line-clamp-2 mb-2 sm:mb-3 leading-relaxed">
               {product.shortDescription}
             </p>
 
@@ -151,7 +151,7 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
         {/* TAGS */}
         <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-col gap-1 z-10">
           {product.isNew && (
-            <span className="bg-[#C86D51] text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold shadow-xs">
+            <span className="bg-[#D96C4A] text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold shadow-xs">
               NEW
             </span>
           )}
@@ -169,7 +169,7 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
           title={isWishlisted ? 'Remove from Wishlist' : 'Save to Wishlist'}
           aria-label="Wishlist"
         >
-          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isWishlisted ? 'fill-[#C86D51] text-[#C86D51]' : ''}`} />
+          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isWishlisted ? 'fill-[#D96C4A] text-[#D96C4A]' : ''}`} />
         </button>
 
         {/* DESKTOP QUICK ACTION HOVER OVERLAY */}
@@ -205,7 +205,7 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
           </div>
 
           {/* PRODUCT NAME */}
-          <h3 className="font-brand-title text-xs sm:text-base font-semibold text-[#1E2A21] group-hover:text-[#5B7A5E] transition-colors leading-tight sm:leading-snug line-clamp-2 mb-1">
+          <h3 className="font-brand-title text-xs sm:text-base font-semibold text-[#1E2A21] group-hover:text-[#5B7A5E] transition-colors leading-tight sm:leading-snug line-clamp-2 mb-1 tracking-wide">
             {product.name}
           </h3>
 

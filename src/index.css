@@ -62,8 +62,47 @@ html, body {
 
 /* Subtle Linen Texture Overlay */
 .linen-texture {
-  background-image: radial-gradient(rgba(127, 154, 131, 0.04) 1px, transparent 0);
+  background-image: radial-gradient(rgba(127, 154, 131, 0.05) 1px, transparent 0);
   background-size: 24px 24px;
+}
+
+/* Subtle Stitch Line Divider */
+.stitch-border-b {
+  border-bottom: 1px dashed rgba(115, 147, 118, 0.35);
+}
+.stitch-border-t {
+  border-top: 1px dashed rgba(115, 147, 118, 0.35);
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  .luxury-image-card,
+  .hero-bg-zoom {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 /* Smooth luxury scrollbars */
@@ -84,10 +123,10 @@ html, body {
 
 /* Subtle image hover animation */
 .luxury-image-card {
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
 }
 .luxury-image-card:hover {
-  transform: scale(1.03);
+  transform: scale(1.035);
 }
 
 /* Refined custom badge */
@@ -122,5 +161,6 @@ html, body {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
 
 
