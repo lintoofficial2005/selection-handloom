@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useModals } from '../../context/ModalContext';
+import { mainCategories } from '../../data/categories';
 import { 
   Search, 
   Heart, 
@@ -13,14 +14,16 @@ import {
   ChevronDown,
   ChevronRight,
   Phone,
-  Sparkles
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 
 export const Header = ({ currentRoute, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileShopOpen, setIsMobileShopOpen] = useState(false);
-  const [isShopHovered, setIsShopHovered] = useState(false);
+  const [isMobileFurnishingsOpen, setIsMobileFurnishingsOpen] = useState(true);
+  const [isMobileSuitsOpen, setIsMobileSuitsOpen] = useState(false);
+  const [isFurnishingsHovered, setIsFurnishingsHovered] = useState(false);
 
   const { totalItemsCount, setIsCartOpen } = useCart();
   const { wishlistCount } = useWishlist();
@@ -52,21 +55,13 @@ export const Header = ({ currentRoute, onNavigate }) => {
     };
   }, [isMobileMenuOpen]);
 
-  const navItems = [
-    { label: 'HOME', route: 'home' },
-    { label: 'SHOP', route: 'shop', hasDropdown: true },
-    { label: 'CURTAINS', route: 'category-curtains' },
-    { label: 'BLINDS', route: 'category-blinds' },
-    { label: 'HOME LINEN', route: 'category-home-linen' },
-    { label: 'SUITS', route: 'category-suits' },
-    { label: 'ABOUT', route: 'about' },
-    { label: 'CONTACT', route: 'contact' },
-  ];
-
   const handleNavClick = (route) => {
     onNavigate(route);
     setIsMobileMenuOpen(false);
+    setIsFurnishingsHovered(false);
   };
+
+  const homeFurnishingMeta = mainCategories.find(c => c.id === 'home-furnishings');
 
   return (
     <>
@@ -91,7 +86,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
               </button>
             </div>
 
-            {/* BRAND LOGO — COMPACT & CENTERED ON MOBILE, ALIGNED LEFT ON DESKTOP */}
+            {/* BRAND LOGO */}
             <div className="flex items-center">
               <button
                 onClick={() => onNavigate('home')}
@@ -119,78 +114,142 @@ export const Header = ({ currentRoute, onNavigate }) => {
             </div>
 
             {/* DESKTOP NAVIGATION */}
-            <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-              {navItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="relative py-2"
-                  onMouseEnter={() => item.hasDropdown && setIsShopHovered(true)}
-                  onMouseLeave={() => item.hasDropdown && setIsShopHovered(false)}
-                >
-                  <button
-                    onClick={() => onNavigate(item.route)}
-                    className={`text-xs uppercase tracking-[0.2em] font-medium transition-all duration-200 cursor-pointer flex items-center gap-1 ${
-                      currentRoute === item.route
-                        ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
-                        : 'text-[#3A403B] hover:text-[#5B7A5E]'
-                    }`}
-                  >
-                    {item.label}
-                    {item.hasDropdown && <ChevronDown className="w-3 h-3 opacity-60" />}
-                  </button>
+            <nav className="hidden lg:flex items-center gap-6 xl:gap-7">
+              {/* HOME */}
+              <button
+                onClick={() => onNavigate('home')}
+                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                  currentRoute === 'home'
+                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
+                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                }`}
+              >
+                HOME
+              </button>
 
-                  {/* Dropdown Menu for SHOP */}
-                  {item.hasDropdown && isShopHovered && (
-                    <div className="absolute top-full left-0 w-64 bg-[#FAF7F2] border border-[#D0DDD1] rounded-xl shadow-xl py-3 px-4 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                      <div className="text-[10px] uppercase tracking-widest text-[#739376] font-semibold mb-2 border-b border-[#E6EDE6] pb-1.5">
-                        Explore Handlooms
-                      </div>
-                      <div className="flex flex-col gap-2 text-xs">
-                        <button 
-                          onClick={() => { onNavigate('category-curtains'); setIsShopHovered(false); }}
-                          className="text-left py-1 text-[#243528] hover:text-[#5B7A5E] hover:translate-x-1 transition-all cursor-pointer"
-                        >
-                          Curtains &amp; Drapery
-                        </button>
-                        <button 
-                          onClick={() => { onNavigate('category-blinds'); setIsShopHovered(false); }}
-                          className="text-left py-1 text-[#243528] hover:text-[#5B7A5E] hover:translate-x-1 transition-all cursor-pointer"
-                        >
-                          Timber &amp; Roman Blinds
-                        </button>
-                        <button 
-                          onClick={() => { onNavigate('category-home-linen'); setIsShopHovered(false); }}
-                          className="text-left py-1 text-[#243528] hover:text-[#5B7A5E] hover:translate-x-1 transition-all cursor-pointer"
-                        >
-                          Home Linen &amp; Throws
-                        </button>
-                        <button 
-                          onClick={() => { onNavigate('category-suits'); setIsShopHovered(false); }}
-                          className="text-left py-1 text-[#243528] hover:text-[#5B7A5E] hover:translate-x-1 transition-all cursor-pointer"
-                        >
-                          Suiting &amp; Silk Fabrics
-                        </button>
-                        <div className="border-t border-[#E6EDE6] my-1" />
-                        <button 
-                          onClick={() => { onNavigate('shop'); setIsShopHovered(false); }}
-                          className="text-left py-1 text-[#5B7A5E] font-semibold hover:underline cursor-pointer"
-                        >
-                          View All Collections →
-                        </button>
-                      </div>
+              {/* HOME FURNISHINGS MEGA DROPDOWN */}
+              <div
+                className="relative py-2"
+                onMouseEnter={() => setIsFurnishingsHovered(true)}
+                onMouseLeave={() => setIsFurnishingsHovered(false)}
+              >
+                <button
+                  onClick={() => onNavigate('category-home-furnishings')}
+                  className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer flex items-center gap-1 ${
+                    currentRoute.includes('bedding') || 
+                    currentRoute.includes('curtains') || 
+                    currentRoute.includes('bath') || 
+                    currentRoute.includes('soft') || 
+                    currentRoute === 'category-home-furnishings'
+                      ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
+                      : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                  }`}
+                >
+                  <span>HOME FURNISHINGS</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isFurnishingsHovered ? 'rotate-180 text-[#5B7A5E]' : 'opacity-60'}`} />
+                </button>
+
+                {/* MEGA MENU CONTAINER */}
+                {isFurnishingsHovered && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-[720px] xl:w-[780px] bg-[#FAF7F2] border border-[#D0DDD1] rounded-2xl shadow-2xl p-6 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                    <div className="grid grid-cols-4 gap-5">
+                      {homeFurnishingMeta?.categories.map((cat) => (
+                        <div key={cat.id} className="space-y-2">
+                          <button
+                            onClick={() => handleNavClick(cat.slug)}
+                            className="text-left font-brand-title text-sm font-bold text-[#1E2A21] hover:text-[#5B7A5E] transition-colors block border-b border-[#E6EDE6] pb-1.5 cursor-pointer"
+                          >
+                            {cat.name}
+                          </button>
+                          <ul className="space-y-1 text-xs text-[#555C56]">
+                            {cat.subcategories.map((sub) => (
+                              <li key={sub}>
+                                <button
+                                  onClick={() => handleNavClick(`${cat.slug}?sub=${encodeURIComponent(sub)}`)}
+                                  className="text-left py-0.5 text-[#555C56] hover:text-[#243528] hover:translate-x-1 transition-all cursor-pointer block"
+                                >
+                                  {sub}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
                     </div>
-                  )}
-                </div>
-              ))}
+
+                    <div className="mt-5 pt-4 border-t border-[#E6EDE6] flex items-center justify-between bg-[#EDF3ED] -mx-6 -mb-6 px-6 py-3 rounded-b-2xl">
+                      <span className="text-[11px] text-[#49634C] font-medium">
+                        ✨ 75 Years of Masterhouse Furnishings • Made with 100% Certified Fibres
+                      </span>
+                      <button
+                        onClick={() => handleNavClick('category-home-furnishings')}
+                        className="text-xs text-[#243528] font-bold uppercase tracking-wider hover:text-[#5B7A5E] flex items-center gap-1 cursor-pointer"
+                      >
+                        <span>Explore All Furnishings</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* LADIES' SUITS */}
+              <button
+                onClick={() => onNavigate('category-suits')}
+                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                  currentRoute === 'category-suits' || currentRoute === 'category-ladies-suits'
+                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
+                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                }`}
+              >
+                LADIES' SUITS
+              </button>
+
+              {/* NEW ARRIVALS */}
+              <button
+                onClick={() => onNavigate('new-arrivals')}
+                className={`text-xs uppercase tracking-[0.18em] font-semibold transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                  currentRoute === 'new-arrivals'
+                    ? 'text-[#C86D51] font-bold border-b-2 border-[#C86D51] pb-1'
+                    : 'text-[#C86D51] hover:text-[#9E4A32]'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-[#D99B26]" />
+                <span>NEW ARRIVALS</span>
+              </button>
+
+              {/* ABOUT US */}
+              <button
+                onClick={() => onNavigate('about')}
+                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                  currentRoute === 'about'
+                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
+                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                }`}
+              >
+                ABOUT US
+              </button>
+
+              {/* CONTACT */}
+              <button
+                onClick={() => onNavigate('contact')}
+                className={`text-xs uppercase tracking-[0.18em] font-medium transition-all duration-200 cursor-pointer ${
+                  currentRoute === 'contact'
+                    ? 'text-[#243528] font-bold border-b-2 border-[#5B7A5E] pb-1'
+                    : 'text-[#3A403B] hover:text-[#5B7A5E]'
+                }`}
+              >
+                CONTACT
+              </button>
             </nav>
 
-            {/* RIGHT UTILITIES: [SEARCH] [CART] ON MOBILE + EXTENDED ON DESKTOP */}
-            <div className="flex items-center gap-1 sm:gap-2.5 lg:gap-4">
+            {/* RIGHT UTILITIES: [SEARCH] [ACCOUNT] [WISHLIST] [CART] */}
+            <div className="flex items-center gap-1 sm:gap-2.5 lg:gap-3.5">
               <button
                 onClick={openConsultation}
-                className="hidden xl:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] uppercase tracking-wider font-semibold border border-[#739376] text-[#243528] bg-[#E6EDE6]/60 hover:bg-[#739376] hover:text-white transition-all cursor-pointer shadow-xs"
+                className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase tracking-wider font-semibold border border-[#739376] text-[#243528] bg-[#E6EDE6]/60 hover:bg-[#739376] hover:text-white transition-all cursor-pointer shadow-xs"
               >
-                <Calendar className="w-3.5 h-3.5" />
+                <Calendar className="w-3 h-3 text-[#5B7A5E]" />
                 <span>Book Consultation</span>
               </button>
 
@@ -217,7 +276,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
               >
                 <Heart className="w-5 h-5" />
                 {wishlistCount > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#739376] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#C86D51] text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                     {wishlistCount}
                   </span>
                 )}
@@ -282,12 +341,12 @@ export const Header = ({ currentRoute, onNavigate }) => {
             </div>
 
             {/* DRAWER NAVIGATION LINKS */}
-            <div className="p-5 space-y-1 flex-1">
+            <div className="p-4 sm:p-5 space-y-1.5 flex-1 overflow-y-auto">
               
               {/* HOME */}
               <button
                 onClick={() => handleNavClick('home')}
-                className={`w-full text-left py-3 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-semibold flex items-center justify-between transition-colors ${
+                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.18em] font-semibold flex items-center justify-between transition-colors ${
                   currentRoute === 'home' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#3A403B] hover:bg-stone-100'
                 }`}
               >
@@ -295,139 +354,136 @@ export const Header = ({ currentRoute, onNavigate }) => {
                 <ChevronRight className="w-4 h-4 text-[#739376]" />
               </button>
 
-              {/* SHOP WITH ACCORDION */}
-              <div className="rounded-xl overflow-hidden">
-                <div className="flex items-center justify-between">
+              {/* HOME FURNISHINGS ACCORDION */}
+              <div className="rounded-xl overflow-hidden border border-[#D0DDD1]/60 bg-white/70">
+                <div className="flex items-center justify-between p-1">
                   <button
-                    onClick={() => handleNavClick('shop')}
-                    className={`flex-1 text-left py-3 px-3 rounded-l-xl text-xs uppercase tracking-[0.2em] font-semibold transition-colors ${
-                      currentRoute === 'shop' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#3A403B] hover:bg-stone-100'
-                    }`}
+                    onClick={() => handleNavClick('category-home-furnishings')}
+                    className="flex-1 text-left py-2 px-2.5 text-xs uppercase tracking-[0.18em] font-bold text-[#1E2A21]"
                   >
-                    SHOP ALL TEXTILES
+                    HOME FURNISHINGS
                   </button>
                   <button
-                    onClick={() => setIsMobileShopOpen(!isMobileShopOpen)}
-                    className="p-3 text-[#5B7A5E] hover:bg-stone-100 rounded-r-xl transition-colors cursor-pointer"
-                    aria-label="Toggle Shop Categories"
+                    onClick={() => setIsMobileFurnishingsOpen(!isMobileFurnishingsOpen)}
+                    className="p-2 text-[#5B7A5E] hover:bg-stone-100 rounded-lg transition-colors cursor-pointer"
+                    aria-label="Toggle Furnishings Categories"
                   >
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileShopOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileFurnishingsOpen ? 'rotate-180' : ''}`} />
                   </button>
                 </div>
 
-                {/* ACCORDION CATEGORIES */}
-                {isMobileShopOpen && (
-                  <div className="bg-[#EDF3ED]/60 rounded-xl p-2.5 my-1 space-y-1 border border-[#D0DDD1]/50 animate-in fade-in duration-200">
+                {isMobileFurnishingsOpen && (
+                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-[#E6EDE6] bg-[#EDF3ED]/40 text-xs">
+                    {/* Bedding */}
+                    <button
+                      onClick={() => handleNavClick('category-bedding')}
+                      className="w-full text-left py-2 px-2.5 font-semibold text-[#243528] flex items-center justify-between hover:bg-white rounded-lg transition-colors"
+                    >
+                      <span>Bedding</span>
+                      <span className="text-[10px] text-[#739376]">Bedsheets, Dohars, Quilts</span>
+                    </button>
+
+                    {/* Curtains */}
                     <button
                       onClick={() => handleNavClick('category-curtains')}
-                      className="w-full text-left py-2 px-3 text-xs text-[#243528] font-medium hover:text-[#5B7A5E] flex items-center justify-between rounded-lg hover:bg-white/60"
+                      className="w-full text-left py-2 px-2.5 font-semibold text-[#243528] flex items-center justify-between hover:bg-white rounded-lg transition-colors"
                     >
-                      <span>Curtains &amp; Drapery</span>
-                      <span className="text-[10px] text-[#739376]">34 Styles</span>
+                      <span>Curtains</span>
+                      <span className="text-[10px] text-[#739376]">Stitched &amp; Unstitched</span>
                     </button>
+
+                    {/* Bath & Linen */}
                     <button
-                      onClick={() => handleNavClick('category-blinds')}
-                      className="w-full text-left py-2 px-3 text-xs text-[#243528] font-medium hover:text-[#5B7A5E] flex items-center justify-between rounded-lg hover:bg-white/60"
+                      onClick={() => handleNavClick('category-bath-linen')}
+                      className="w-full text-left py-2 px-2.5 font-semibold text-[#243528] flex items-center justify-between hover:bg-white rounded-lg transition-colors"
                     >
-                      <span>Timber &amp; Roman Blinds</span>
-                      <span className="text-[10px] text-[#739376]">22 Systems</span>
+                      <span>Bath &amp; Linen</span>
+                      <span className="text-[10px] text-[#739376]">Towels &amp; Bathrobes</span>
                     </button>
+
+                    {/* Soft Furnishings */}
                     <button
-                      onClick={() => handleNavClick('category-home-linen')}
-                      className="w-full text-left py-2 px-3 text-xs text-[#243528] font-medium hover:text-[#5B7A5E] flex items-center justify-between rounded-lg hover:bg-white/60"
+                      onClick={() => handleNavClick('category-soft-furnishings')}
+                      className="w-full text-left py-2 px-2.5 font-semibold text-[#243528] flex items-center justify-between hover:bg-white rounded-lg transition-colors"
                     >
-                      <span>Home Linen &amp; Cushions</span>
-                      <span className="text-[10px] text-[#739376]">48 Pieces</span>
-                    </button>
-                    <button
-                      onClick={() => handleNavClick('category-suits')}
-                      className="w-full text-left py-2 px-3 text-xs text-[#243528] font-medium hover:text-[#5B7A5E] flex items-center justify-between rounded-lg hover:bg-white/60"
-                    >
-                      <span>Suiting &amp; Silk Fabrics</span>
-                      <span className="text-[10px] text-[#739376]">28 Cuts</span>
+                      <span>Soft Furnishings</span>
+                      <span className="text-[10px] text-[#739376]">Covers, Cushions, Bolsters</span>
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* DIRECT CATEGORY SHORTCUTS */}
+              {/* LADIES' SUITS ACCORDION */}
+              <div className="rounded-xl overflow-hidden border border-[#D0DDD1]/60 bg-white/70">
+                <div className="flex items-center justify-between p-1">
+                  <button
+                    onClick={() => handleNavClick('category-suits')}
+                    className="flex-1 text-left py-2 px-2.5 text-xs uppercase tracking-[0.18em] font-bold text-[#1E2A21]"
+                  >
+                    LADIES' SUITS
+                  </button>
+                  <button
+                    onClick={() => setIsMobileSuitsOpen(!isMobileSuitsOpen)}
+                    className="p-2 text-[#5B7A5E] hover:bg-stone-100 rounded-lg transition-colors cursor-pointer"
+                    aria-label="Toggle Suits Categories"
+                  >
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileSuitsOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                </div>
+
+                {isMobileSuitsOpen && (
+                  <div className="px-3 pb-3 pt-1 space-y-1 border-t border-[#E6EDE6] bg-[#EDF3ED]/40 text-xs">
+                    <button
+                      onClick={() => handleNavClick('category-suits')}
+                      className="w-full text-left py-2 px-2.5 font-semibold text-[#243528] flex items-center justify-between hover:bg-white rounded-lg transition-colors"
+                    >
+                      <span>Unstitched</span>
+                      <span className="text-[10px] text-[#739376]">Matka Silk, Chanderi, Merino</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* NEW ARRIVALS */}
               <button
-                onClick={() => handleNavClick('category-curtains')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
-                  currentRoute === 'category-curtains' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#555C56] hover:bg-stone-100'
+                onClick={() => handleNavClick('new-arrivals')}
+                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.18em] font-bold flex items-center justify-between transition-colors ${
+                  currentRoute === 'new-arrivals' ? 'bg-[#FBEBE6] text-[#C86D51]' : 'text-[#C86D51] hover:bg-stone-100'
                 }`}
               >
-                <span>CURTAINS</span>
-                <span className="text-[10px] text-[#739376] font-sans">Flax / Jacquard</span>
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D99B26]" />
+                  <span>NEW ARRIVALS</span>
+                </div>
+                <span className="text-[9px] bg-[#C86D51] text-white px-2 py-0.5 rounded-full font-bold uppercase">
+                  Fresh
+                </span>
               </button>
 
-              <button
-                onClick={() => handleNavClick('category-blinds')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
-                  currentRoute === 'category-blinds' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#555C56] hover:bg-stone-100'
-                }`}
-              >
-                <span>BLINDS</span>
-                <span className="text-[10px] text-[#739376] font-sans">Timber / Roman</span>
-              </button>
-
-              <button
-                onClick={() => handleNavClick('category-home-linen')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
-                  currentRoute === 'category-home-linen' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#555C56] hover:bg-stone-100'
-                }`}
-              >
-                <span>HOME LINEN</span>
-                <span className="text-[10px] text-[#739376] font-sans">Block-Print / Throws</span>
-              </button>
-
-              <button
-                onClick={() => handleNavClick('category-suits')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
-                  currentRoute === 'category-suits' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#555C56] hover:bg-stone-100'
-                }`}
-              >
-                <span>SUITS &amp; FABRICS</span>
-                <span className="text-[10px] text-[#739376] font-sans">Merino / Silk</span>
-              </button>
-
-              <div className="border-t border-[#E6EDE6] my-2" />
-
-              {/* ABOUT & HERITAGE */}
+              {/* ABOUT US */}
               <button
                 onClick={() => handleNavClick('about')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
+                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.18em] font-medium flex items-center justify-between transition-colors ${
                   currentRoute === 'about' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#3A403B] hover:bg-stone-100'
                 }`}
               >
-                <span>OUR 75-YEAR HERITAGE</span>
-                <Sparkles className="w-3.5 h-3.5 text-[#5B7A5E]" />
-              </button>
-
-              {/* STORE LOCATION */}
-              <button
-                onClick={() => handleNavClick('store-location')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
-                  currentRoute === 'store-location' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#3A403B] hover:bg-stone-100'
-                }`}
-              >
-                <span>MEERUT SHOWROOM</span>
+                <span>ABOUT US (75 YEARS)</span>
                 <ChevronRight className="w-4 h-4 text-[#739376]" />
               </button>
 
               {/* CONTACT */}
               <button
                 onClick={() => handleNavClick('contact')}
-                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-between transition-colors ${
+                className={`w-full text-left py-2.5 px-3 rounded-xl text-xs uppercase tracking-[0.18em] font-medium flex items-center justify-between transition-colors ${
                   currentRoute === 'contact' ? 'bg-[#E6EDE6] text-[#243528] font-bold' : 'text-[#3A403B] hover:bg-stone-100'
                 }`}
               >
-                <span>CONTACT &amp; ENQUIRY</span>
+                <span>CONTACT</span>
                 <ChevronRight className="w-4 h-4 text-[#739376]" />
               </button>
 
               {/* QUICK ACCOUNT & WISHLIST ROW */}
-              <div className="grid grid-cols-2 gap-2 pt-3">
+              <div className="grid grid-cols-2 gap-2 pt-2">
                 <button
                   onClick={() => handleNavClick('account')}
                   className="py-2.5 px-3 bg-white rounded-xl border border-[#D0DDD1] text-xs font-semibold text-[#243528] flex items-center justify-center gap-1.5 active:bg-[#E6EDE6]"
@@ -442,7 +498,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
                   <Heart className="w-4 h-4 text-[#5B7A5E]" />
                   <span>Wishlist</span>
                   {wishlistCount > 0 && (
-                    <span className="w-4 h-4 bg-[#739376] text-white text-[9px] font-bold rounded-full flex items-center justify-center ml-1">
+                    <span className="w-4 h-4 bg-[#C86D51] text-white text-[9px] font-bold rounded-full flex items-center justify-center ml-1">
                       {wishlistCount}
                     </span>
                   )}
@@ -452,7 +508,7 @@ export const Header = ({ currentRoute, onNavigate }) => {
             </div>
 
             {/* DRAWER FOOTER / CONCIERGE CALLOUT */}
-            <div className="p-4 bg-white border-t border-[#E6EDE6] space-y-3 pb-safe">
+            <div className="p-4 bg-white border-t border-[#E6EDE6] space-y-2.5 pb-safe">
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -461,17 +517,14 @@ export const Header = ({ currentRoute, onNavigate }) => {
                 className="w-full py-3.5 bg-[#243528] text-[#FAF7F2] rounded-xl text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 active:bg-[#3D503F] shadow-sm cursor-pointer"
               >
                 <Calendar className="w-4 h-4 text-[#AEC4B0]" />
-                <span>Book Laser Measurement</span>
+                <span>Book Consultation</span>
               </button>
 
-              <div className="text-center space-y-1">
+              <div className="text-center">
                 <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-[#243528]">
                   <Phone className="w-3.5 h-3.5 text-[#5B7A5E]" />
                   <span>Flagship: +91 121 264 5075</span>
                 </div>
-                <p className="text-[10px] text-[#555C56]">
-                  Open 10:30 AM – 8:30 PM • Meerut Showroom
-                </p>
               </div>
             </div>
 
@@ -481,4 +534,3 @@ export const Header = ({ currentRoute, onNavigate }) => {
     </>
   );
 };
-

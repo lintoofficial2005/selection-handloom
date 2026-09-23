@@ -23,13 +23,24 @@ export const SearchOverlay = ({ onNavigate }) => {
     ? products.filter(
         (p) =>
           p.name.toLowerCase().includes(query.toLowerCase()) ||
-          p.categoryName.toLowerCase().includes(query.toLowerCase()) ||
+          p.category.toLowerCase().includes(query.toLowerCase()) ||
+          (p.subcategory && p.subcategory.toLowerCase().includes(query.toLowerCase())) ||
           p.material.toLowerCase().includes(query.toLowerCase()) ||
           p.shortDescription.toLowerCase().includes(query.toLowerCase())
       )
     : [];
 
-  const popularTags = ['Botanical Linen', 'Timber Blinds', 'Hand-Block Cushions', 'Merino Wool', 'Silk Jacquard', 'Blackout Drapes'];
+  const popularTags = [
+    'Bedsheets',
+    'Curtains',
+    'Dohars',
+    'Diwan Sets',
+    'Unstitched Fabric',
+    'Towels',
+    'Cushion Covers',
+    'Ladies Suits',
+    'Matka Silk'
+  ];
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-[#FAF7F2] sm:bg-[#1E2A21]/70 sm:backdrop-blur-md pt-0 sm:pt-20 px-0 sm:px-4">
@@ -43,7 +54,7 @@ export const SearchOverlay = ({ onNavigate }) => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search curtains, timber blinds, pure linen..."
+            placeholder="Search bedding, curtains, bath, cushions, suits..."
             className="w-full text-sm sm:text-lg bg-transparent border-none outline-none text-[#243528] placeholder:text-[#555C56]/60 font-sans"
           />
           {query && (
@@ -69,7 +80,7 @@ export const SearchOverlay = ({ onNavigate }) => {
             <div className="space-y-6">
               <div>
                 <p className="text-xs uppercase tracking-widest text-[#739376] font-semibold mb-3 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#D99B26]" />
                   Popular Textile Searches
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -87,14 +98,16 @@ export const SearchOverlay = ({ onNavigate }) => {
 
               <div>
                 <p className="text-xs uppercase tracking-widest text-[#739376] font-semibold mb-3">
-                  Browse by Collection
+                  Browse by Department
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
-                    { label: 'Curtains', route: 'category-curtains', count: '34 Styles' },
-                    { label: 'Blinds', route: 'category-blinds', count: '22 Systems' },
-                    { label: 'Home Linen', route: 'category-home-linen', count: '48 Pieces' },
-                    { label: 'Suits & Fabrics', route: 'category-suits', count: '28 Weaves' },
+                    { label: 'Bedding', route: 'category-bedding', count: 'Bedsheets & Dohars' },
+                    { label: 'Curtains', route: 'category-curtains', count: 'Stitched & Fabric' },
+                    { label: 'Bath & Linen', route: 'category-bath-linen', count: 'Towels & Bathrobes' },
+                    { label: 'Soft Furnishings', route: 'category-soft-furnishings', count: 'Cushions & Covers' },
+                    { label: "Ladies' Suits", route: 'category-suits', count: 'Unstitched Silk Cuts' },
+                    { label: 'New Arrivals', route: 'new-arrivals', count: 'Fresh Weaves' },
                   ].map((cat) => (
                     <button
                       key={cat.label}
@@ -138,7 +151,7 @@ export const SearchOverlay = ({ onNavigate }) => {
                     "No handcrafted textiles found matching '{query}'"
                   </p>
                   <p className="text-xs text-[#739376] mt-2">
-                    Try searching for linen, botanical, sheer, jacquard, or cashmere.
+                    Try searching for bedding, dohar, curtains, linen, or matka silk.
                   </p>
                 </div>
               ) : (
@@ -163,9 +176,15 @@ export const SearchOverlay = ({ onNavigate }) => {
                       </div>
                       <div className="flex flex-col justify-between flex-1 min-w-0">
                         <div>
-                          <span className="text-[10px] uppercase tracking-wider text-[#739376] font-semibold">
-                            {product.categoryName}
-                          </span>
+                          <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-[#739376] font-semibold">
+                            <span>{product.category}</span>
+                            {product.subcategory && (
+                              <>
+                                <span className="text-stone-300">•</span>
+                                <span className="text-stone-400">{product.subcategory}</span>
+                              </>
+                            )}
+                          </div>
                           <h4
                             onClick={() => {
                               onNavigate(`product-${product.id}`);

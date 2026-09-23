@@ -12,7 +12,7 @@ export const HeroSection = ({ onNavigate }) => {
           alt="Selection Handloom Showroom Interior & Linen Drapery"
           className="w-full h-full object-cover object-[center_30%] sm:object-center scale-102 transition-transform duration-1000 ease-out"
         />
-        {/* Soft luxury multi-layer gradient overlays tuned for mobile contrast */}
+        {/* Soft luxury multi-layer gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#FAF7F2]/95 via-[#FAF7F2]/85 to-[#FAF7F2]/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-transparent to-transparent" />
       </div>
@@ -20,9 +20,9 @@ export const HeroSection = ({ onNavigate }) => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-6 sm:py-12">
         <div className="max-w-2xl space-y-4 sm:space-y-6">
           
-          {/* HERITAGE PILL BADGE */}
+          {/* HERITAGE PILL BADGE WITH VIBRANT GOLD SPARKLE */}
           <div className="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-[#E6EDE6]/95 border border-[#739376]/40 backdrop-blur-md shadow-xs animate-in fade-in slide-in-from-bottom-2 duration-700">
-            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#49634C] animate-pulse shrink-0" />
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#D99B26] animate-pulse shrink-0" />
             <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.25em] font-semibold text-[#243528] font-sans">
               ESTD. 1950 • MEERUT
             </span>
@@ -44,7 +44,7 @@ export const HeroSection = ({ onNavigate }) => {
 
           {/* EDITORIAL SUBTEXT */}
           <p className="font-sans text-xs sm:text-base text-[#3A403B] leading-relaxed max-w-lg animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
-            Step into 75 years of timeless Indian textile craftsmanship. From hand-block printed flax curtains and architectural timber blinds to heirloom home linen and suiting weaves — tailored for spaces of quiet luxury.
+            Step into 75 years of timeless Indian textile craftsmanship. From heirloom bedding and architectural drapery to fine unstitched silks — tailored for spaces of quiet luxury.
           </p>
 
           {/* CALL TO ACTION BUTTONS — STACKED ON MOBILE FOR TOUCH COMFORT */}
@@ -53,15 +53,16 @@ export const HeroSection = ({ onNavigate }) => {
               onClick={() => onNavigate('shop')}
               className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-[#243528] text-[#FAF7F2] text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#3D503F] active:bg-[#3D503F] transition-all flex items-center justify-center gap-2.5 shadow-md active:scale-98 cursor-pointer"
             >
-              <span>Explore Collection</span>
+              <span>Explore Collections</span>
               <ArrowRight className="w-4 h-4 text-[#AEC4B0]" />
             </button>
 
             <button
-              onClick={() => onNavigate('about')}
-              className="w-full sm:w-auto px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl bg-white/95 border border-[#8DA98F]/60 text-[#243528] text-xs uppercase tracking-[0.2em] font-semibold hover:bg-[#E6EDE6] active:bg-[#E6EDE6] transition-all backdrop-blur-xs text-center cursor-pointer shadow-xs active:scale-98"
+              onClick={() => onNavigate('new-arrivals')}
+              className="w-full sm:w-auto px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl bg-white/95 border border-[#C86D51]/50 text-[#C86D51] text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#FBEBE6] active:bg-[#FBEBE6] transition-all backdrop-blur-xs text-center cursor-pointer shadow-xs active:scale-98 flex items-center justify-center gap-2"
             >
-              Our 75-Year Story
+              <Sparkles className="w-3.5 h-3.5 text-[#D99B26]" />
+              <span>New Arrivals</span>
             </button>
           </div>
 
@@ -72,7 +73,7 @@ export const HeroSection = ({ onNavigate }) => {
               <span className="text-[9px] sm:text-xs text-[#555C56] uppercase tracking-wider block">Years of Trust</span>
             </div>
             <div>
-              <span className="font-brand-title text-base sm:text-xl font-bold block">100%</span>
+              <span className="font-brand-title text-base sm:text-xl font-bold block text-[#C86D51]">100%</span>
               <span className="text-[9px] sm:text-xs text-[#555C56] uppercase tracking-wider block">Handloom Pure</span>
             </div>
             <div>
@@ -87,4 +88,3 @@ export const HeroSection = ({ onNavigate }) => {
     </section>
   );
 };
-

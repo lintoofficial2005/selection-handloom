@@ -3,7 +3,7 @@ import { useWishlist } from '../../context/WishlistContext';
 import { useCart } from '../../context/CartContext';
 import { useModals } from '../../context/ModalContext';
 import { SafeImage } from '../ui/SafeImage';
-import { Heart, Eye, ShoppingBag, Check } from 'lucide-react';
+import { Heart, Eye, ShoppingBag, Sparkles } from 'lucide-react';
 
 export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -50,25 +50,34 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
+          {product.isNew && (
+            <span className="absolute top-2.5 left-2.5 bg-[#C86D51] text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold shadow-xs">
+              NEW
+            </span>
+          )}
           <button
             onClick={handleWishlistToggle}
             className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-[#243528] active:scale-90 shadow-xs cursor-pointer"
             aria-label="Toggle Wishlist"
           >
-            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#739376] text-[#739376]' : ''}`} />
+            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#C86D51] text-[#C86D51]' : ''}`} />
           </button>
         </div>
 
         <div className="flex flex-col justify-between flex-1">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#739376] font-semibold">
-                {product.categoryName}
+              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#5B7A5E] font-bold">
+                {product.category}
               </span>
-              <span className="text-stone-300">•</span>
-              <span className="text-[9px] sm:text-[10px] text-[#555C56]">
-                {product.origin}
-              </span>
+              {product.subcategory && (
+                <>
+                  <span className="text-stone-300">•</span>
+                  <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-[#739376] font-semibold">
+                    {product.subcategory}
+                  </span>
+                </>
+              )}
             </div>
 
             <h3 className="font-brand-title text-sm sm:text-lg font-semibold text-[#1E2A21] group-hover:text-[#5B7A5E] transition-colors mb-1">
@@ -83,9 +92,9 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
               <span className="px-2 py-0.5 bg-[#F4F7F4] rounded border border-[#D0DDD1]">
                 {product.material}
               </span>
-              {product.opacity && (
+              {product.weave && (
                 <span className="px-2 py-0.5 bg-[#F4F7F4] rounded border border-[#D0DDD1]">
-                  {product.opacity}
+                  {product.weave}
                 </span>
               )}
             </div>
@@ -141,26 +150,26 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
 
         {/* TAGS */}
         <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-col gap-1 z-10">
-          {product.isBestseller && (
+          {product.isNew && (
+            <span className="bg-[#C86D51] text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold shadow-xs">
+              NEW
+            </span>
+          )}
+          {product.isBestseller && !product.isNew && (
             <span className="bg-[#243528]/90 text-[#FAF7F2] text-[8px] sm:text-[9px] uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">
               Bestseller
             </span>
           )}
-          {product.isNew && (
-            <span className="bg-[#739376]/95 text-white text-[8px] sm:text-[9px] uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded-full font-medium backdrop-blur-xs">
-              New Weave
-            </span>
-          )}
         </div>
 
-        {/* WISHLIST BUTTON — PERMANENT TOUCH TARGET ON MOBILE & DESKTOP */}
+        {/* WISHLIST BUTTON */}
         <button
           onClick={handleWishlistToggle}
           className="absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-[#243528] active:scale-90 shadow-xs z-10 transition-all cursor-pointer hover:scale-105"
           title={isWishlisted ? 'Remove from Wishlist' : 'Save to Wishlist'}
           aria-label="Wishlist"
         >
-          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isWishlisted ? 'fill-[#739376] text-[#739376]' : ''}`} />
+          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isWishlisted ? 'fill-[#C86D51] text-[#C86D51]' : ''}`} />
         </button>
 
         {/* DESKTOP QUICK ACTION HOVER OVERLAY */}
@@ -187,10 +196,12 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
       {/* CONTENT */}
       <div className="p-2.5 sm:p-4 flex flex-col justify-between flex-1">
         <div>
-          {/* CATEGORY & ORIGIN */}
-          <div className="flex items-center justify-between text-[8px] sm:text-[10px] uppercase tracking-widest text-[#739376] font-semibold mb-0.5 sm:mb-1">
-            <span className="truncate max-w-[65%]">{product.categoryName}</span>
-            <span className="text-stone-400 font-normal truncate max-w-[30%]">{product.origin.split(' ')[0]}</span>
+          {/* CATEGORY & SUBCATEGORY */}
+          <div className="flex items-center justify-between text-[8px] sm:text-[10px] uppercase tracking-widest text-[#5B7A5E] font-bold mb-0.5 sm:mb-1">
+            <span className="truncate max-w-[65%]">{product.category}</span>
+            {product.subcategory && (
+              <span className="text-stone-400 font-semibold truncate max-w-[30%]">{product.subcategory}</span>
+            )}
           </div>
 
           {/* PRODUCT NAME */}
@@ -247,4 +258,3 @@ export const ProductCard = ({ product, onNavigate, layout = 'grid' }) => {
     </div>
   );
 };
-

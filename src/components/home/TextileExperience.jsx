@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Eye, ZoomIn, Feather } from 'lucide-react';
+import { Feather, Sparkles } from 'lucide-react';
 
 export const TextileExperience = () => {
   const [activeTexture, setActiveTexture] = useState(0);
@@ -8,9 +8,10 @@ export const TextileExperience = () => {
     {
       name: 'Artisanal Slub Linen',
       title: 'The Organic Breathe of Natural Flax',
-      desc: 'Sourced from long-staple flax and woven on low-speed wooden pit looms in Meerut. The irregular yarn slubs create rich tactile depths that diffuse harsh sunlight into gentle golden-hour warmth.',
+      desc: 'Sourced from long-staple Normandy flax and woven on low-speed wooden pit looms in Meerut. The irregular yarn slubs create rich tactile depths that diffuse sunlight into gentle golden-hour warmth.',
       origin: 'Normandy Flax & Meerut Looms',
       gsm: '240 GSM',
+      accentColor: '#C86D51', // Terracotta
       image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=1200&q=85'
     },
     {
@@ -19,14 +20,16 @@ export const TextileExperience = () => {
       desc: 'High-density organic cotton wefts interlocked with raw filament silk. Raised paisley motifs cast tactile micro-shadows that block drafts and exterior noise while commanding grand aesthetic presence.',
       origin: 'Varanasi Master Guild & Selection Workshop',
       gsm: '380 GSM',
+      accentColor: '#163638', // Deep Teal
       image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=85'
     },
     {
       name: 'Raw Matka Silk & Khadi',
       title: 'Noble Matte Luster & All-Season Comfort',
       desc: 'Hand-reeled mulberry cocoons blended with organic handspun khadi yarn. The natural sericin coating gives this fabric exceptional thermal stability and timeless lived-in elegance.',
-      origin: 'Bengal Artisan Cluster',
+      origin: 'Bengal Artisan Cluster & Meerut',
       gsm: '220 GSM',
+      accentColor: '#D99B26', // Mustard Gold
       image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1200&q=85'
     }
   ];

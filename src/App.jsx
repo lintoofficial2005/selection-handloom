@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ModalProvider } from './context/ModalContext';
@@ -34,47 +34,73 @@ export function App() {
   };
 
   const renderRoute = () => {
-    if (currentRoute === 'home') {
+    // Check if route has subcategory query parameter
+    let baseRoute = currentRoute;
+    let subcategory = 'all';
+
+    if (currentRoute.includes('?sub=')) {
+      const parts = currentRoute.split('?sub=');
+      baseRoute = parts[0];
+      subcategory = decodeURIComponent(parts[1]);
+    }
+
+    if (baseRoute === 'home') {
       return <HomePage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'shop') {
-      return <ShopPage onNavigate={navigateTo} initialCategory="all" />;
+    if (baseRoute === 'shop') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="all" initialSubcategory={subcategory} />;
     }
-    if (currentRoute === 'category-curtains') {
-      return <ShopPage onNavigate={navigateTo} initialCategory="curtains" />;
+    if (baseRoute === 'new-arrivals') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="new-arrivals" initialSubcategory={subcategory} />;
     }
-    if (currentRoute === 'category-blinds') {
-      return <ShopPage onNavigate={navigateTo} initialCategory="blinds" />;
+    if (baseRoute === 'category-home-furnishings') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="home-furnishings" initialSubcategory={subcategory} />;
     }
-    if (currentRoute === 'category-home-linen') {
-      return <ShopPage onNavigate={navigateTo} initialCategory="home-linen" />;
+    if (baseRoute === 'category-bedding') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="bedding" initialSubcategory={subcategory} />;
     }
-    if (currentRoute === 'category-suits') {
-      return <ShopPage onNavigate={navigateTo} initialCategory="suits" />;
+    if (baseRoute === 'category-curtains') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="curtains" initialSubcategory={subcategory} />;
     }
-    if (currentRoute.startsWith('product-')) {
-      const productId = currentRoute.replace('product-', '');
+    if (baseRoute === 'category-bath-linen') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="bath-linen" initialSubcategory={subcategory} />;
+    }
+    if (baseRoute === 'category-soft-furnishings') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="soft-furnishings" initialSubcategory={subcategory} />;
+    }
+    if (baseRoute === 'category-suits' || baseRoute === 'category-ladies-suits') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="suits" initialSubcategory={subcategory} />;
+    }
+    // Legacy route redirects
+    if (baseRoute === 'category-blinds') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="curtains" initialSubcategory={subcategory} />;
+    }
+    if (baseRoute === 'category-home-linen') {
+      return <ShopPage onNavigate={navigateTo} initialCategory="bedding" initialSubcategory={subcategory} />;
+    }
+    if (baseRoute.startsWith('product-')) {
+      const productId = baseRoute.replace('product-', '');
       return <ProductDetailPage productId={productId} onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'cart') {
+    if (baseRoute === 'cart') {
       return <CartPage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'checkout') {
+    if (baseRoute === 'checkout') {
       return <CheckoutPage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'account') {
+    if (baseRoute === 'account') {
       return <AccountPage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'wishlist') {
+    if (baseRoute === 'wishlist') {
       return <WishlistPage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'about') {
+    if (baseRoute === 'about') {
       return <AboutHeritagePage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'store') {
+    if (baseRoute === 'store' || baseRoute === 'store-location') {
       return <StoreLocationPage onNavigate={navigateTo} />;
     }
-    if (currentRoute === 'contact') {
+    if (baseRoute === 'contact') {
       return <ContactPage />;
     }
     return <NotFoundPage onNavigate={navigateTo} />;

@@ -1,24 +1,27 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { products } from '../data/products';
+import { mainCategories } from '../data/categories';
 import { ProductCard } from '../components/shop/ProductCard';
 import { FilterSidebar } from '../components/shop/FilterSidebar';
 import { SortBar } from '../components/shop/SortBar';
 import { ActiveFilters } from '../components/shop/ActiveFilters';
+import { Sparkles } from 'lucide-react';
 
-export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
+export const ShopPage = ({ onNavigate, initialCategory = 'all', initialSubcategory = 'all' }) => {
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(initialSubcategory);
   const [selectedMaterial, setSelectedMaterial] = useState([]);
-  const [selectedOpacity, setSelectedOpacity] = useState([]);
   const [priceRange, setPriceRange] = useState(12000);
   const [sortBy, setSortBy] = useState('featured');
   const [layout, setLayout] = useState('grid');
-  const [visibleCount, setVisibleCount] = useState(10);
+  const [visibleCount, setVisibleCount] = useState(12);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   // Sync if prop changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (initialCategory) setSelectedCategory(initialCategory);
-  }, [initialCategory]);
+    if (initialSubcategory) setSelectedSubcategory(initialSubcategory);
+  }, [initialCategory, initialSubcategory]);
 
   const toggleMaterial = (mat) => {
     setSelectedMaterial(prev =>
@@ -26,37 +29,49 @@ export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
     );
   };
 
-  const toggleOpacity = (op) => {
-    setSelectedOpacity(prev =>
-      prev.includes(op) ? prev.filter(o => o !== op) : [...prev, op]
-    );
-  };
-
   const resetAllFilters = () => {
     setSelectedCategory('all');
+    setSelectedSubcategory('all');
     setSelectedMaterial([]);
-    setSelectedOpacity([]);
     setPriceRange(12000);
   };
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      // Category match
-      if (selectedCategory !== 'all' && p.category !== selectedCategory) {
-        return false;
+      // 1. Category match
+      if (selectedCategory === 'new-arrivals') {
+        if (!p.isNew) return false;
+      } else if (selectedCategory === 'home-furnishings' || selectedCategory === 'category-home-furnishings') {
+        if (p.mainCategory !== 'Home Furnishings') return false;
+      } else if (selectedCategory === 'bedding' || selectedCategory === 'category-bedding') {
+        if (p.category !== 'Bedding') return false;
+      } else if (selectedCategory === 'curtains' || selectedCategory === 'category-curtains') {
+        if (p.category !== 'Curtains') return false;
+      } else if (selectedCategory === 'bath-linen' || selectedCategory === 'category-bath-linen') {
+        if (p.category !== 'Bath & Linen') return false;
+      } else if (selectedCategory === 'soft-furnishings' || selectedCategory === 'category-soft-furnishings') {
+        if (p.category !== 'Soft Furnishings') return false;
+      } else if (selectedCategory === 'suits' || selectedCategory === 'category-suits' || selectedCategory === 'ladies-suits') {
+        if (p.mainCategory !== "Ladies' Suits" && p.category !== "Ladies' Suits") return false;
       }
-      // Price match
+
+      // 2. Subcategory match
+      if (selectedSubcategory && selectedSubcategory !== 'all') {
+        if (p.subcategory !== selectedSubcategory && !p.subcategory.includes(selectedSubcategory)) {
+          return false;
+        }
+      }
+
+      // 3. Price match
       if (p.price > priceRange) {
         return false;
       }
-      // Material match
+
+      // 4. Material match
       if (selectedMaterial.length > 0 && !selectedMaterial.includes(p.material)) {
         return false;
       }
-      // Opacity match
-      if (selectedOpacity.length > 0 && (!p.opacity || !selectedOpacity.includes(p.opacity))) {
-        return false;
-      }
+
       return true;
     }).sort((a, b) => {
       if (sortBy === 'price-low') return a.price - b.price;
@@ -65,24 +80,90 @@ export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
       if (sortBy === 'newest') return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
       return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
     });
-  }, [selectedCategory, selectedMaterial, selectedOpacity, priceRange, sortBy]);
+  }, [selectedCategory, selectedSubcategory, selectedMaterial, priceRange, sortBy]);
 
   const displayedProducts = filteredProducts.slice(0, visibleCount);
+
+  // Dynamic titles and banner text
+  const getBannerDetails = () => {
+    if (selectedCategory === 'new-arrivals') {
+      return {
+        badge: 'FRESH TEXTILES',
+        title: 'New Arrivals',
+        desc: 'Discover our newest seasonal weaves across Bedding, Curtains, Bath, Soft Furnishings, and Ladies’ Suits.'
+      };
+    }
+    if (selectedCategory === 'bedding' || selectedCategory === 'category-bedding') {
+      return {
+        badge: 'HOME FURNISHINGS • BEDDING',
+        title: 'Heirloom Bedding Collection',
+        desc: 'Heirloom bedsheets, pre-washed waffle bedcovers, Jaipuri mulmul dohars, winter quilts, and diwan sets.'
+      };
+    }
+    if (selectedCategory === 'curtains' || selectedCategory === 'category-curtains') {
+      return {
+        badge: 'HOME FURNISHINGS • CURTAINS',
+        title: 'Curtains & Drapery Atelier',
+        desc: 'Ready-to-hang Stitched Drapes and Unstitched Running Fabric by the metre in Belgian flax and jacquard.'
+      };
+    }
+    if (selectedCategory === 'bath-linen' || selectedCategory === 'category-bath-linen') {
+      return {
+        badge: 'HOME FURNISHINGS • BATH & LINEN',
+        title: 'Bath & Linen Sanctuary',
+        desc: '700 GSM zero-twist combed cotton towels and breathable pre-washed flax waffle bathrobes.'
+      };
+    }
+    if (selectedCategory === 'soft-furnishings' || selectedCategory === 'category-soft-furnishings') {
+      return {
+        badge: 'HOME FURNISHINGS • SOFT FURNISHINGS',
+        title: 'Artisanal Soft Furnishings',
+        desc: 'Hand-block cushion sets, quilted sofa protectors, pure silk bolsters, and Kantha embroidered pillow covers.'
+      };
+    }
+    if (selectedCategory === 'suits' || selectedCategory === 'category-suits' || selectedCategory === 'ladies-suits') {
+      return {
+        badge: "LADIES' SUITS • UNSTITCHED",
+        title: "Ladies' Suits & Silk Cuts",
+        desc: 'Unstitched lengths in hand-reeled Matka raw silk, featherweight Chanderi tissue, and Himalayan Merino cashmere.'
+      };
+    }
+    if (selectedCategory === 'home-furnishings' || selectedCategory === 'category-home-furnishings') {
+      return {
+        badge: 'SELECTION HANDLOOM',
+        title: 'Home Furnishings Collection',
+        desc: 'Explore our masterhouse collections of Bedding, Curtains, Bath Linens, and Soft Furnishings.'
+      };
+    }
+    return {
+      badge: 'SELECTION HANDLOOM ATELIER',
+      title: 'The Master Catalogue',
+      desc: 'All collections of heirloom bedding, architectural drapery, bath linens, soft furnishings, and unstitched silks.'
+    };
+  };
+
+  const banner = getBannerDetails();
 
   return (
     <div className="py-6 sm:py-12 bg-[#FAF7F2] min-h-screen animate-in fade-in duration-300">
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         
-        {/* SHOP HERO BANNER WITH SUBTLE PALE SAGE CONTAINER */}
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 bg-[#EDF3ED] p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-[#D0DDD1]/60">
-          <span className="text-[9px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold block mb-1">
-            SELECTION HANDLOOM ATELIER
+        {/* SHOP HERO BANNER */}
+        <div className={`text-center max-w-3xl mx-auto mb-6 sm:mb-10 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border ${
+          selectedCategory === 'new-arrivals'
+            ? 'bg-[#FBEBE6] border-[#C86D51]/30'
+            : 'bg-[#EDF3ED] border-[#D0DDD1]/60'
+        }`}>
+          <span className={`text-[9px] sm:text-[11px] uppercase tracking-[0.25em] font-bold block mb-1 ${
+            selectedCategory === 'new-arrivals' ? 'text-[#C86D51]' : 'text-[#5B7A5E]'
+          }`}>
+            {banner.badge}
           </span>
           <h1 className="font-editorial text-2xl sm:text-4xl lg:text-5xl font-light text-[#1E2A21]">
-            The Master Catalogue
+            {banner.title}
           </h1>
           <p className="text-xs sm:text-sm text-[#555C56] mt-1.5 sm:mt-2 max-w-xl mx-auto">
-            Curtains, architectural blinds, pure linen beddings, and cashmere suiting fabrics hand-selected for enduring tranquility.
+            {banner.desc}
           </p>
         </div>
 
@@ -90,10 +171,10 @@ export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
         <ActiveFilters
           selectedCategory={selectedCategory}
           onClearCategory={() => setSelectedCategory('all')}
+          selectedSubcategory={selectedSubcategory}
+          onClearSubcategory={() => setSelectedSubcategory('all')}
           selectedMaterial={selectedMaterial}
           onRemoveMaterial={toggleMaterial}
-          selectedOpacity={selectedOpacity}
-          onRemoveOpacity={toggleOpacity}
           priceRange={priceRange}
           onResetPrice={() => setPriceRange(12000)}
           onClearAll={resetAllFilters}
@@ -106,10 +187,10 @@ export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
           <FilterSidebar
             selectedCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
+            selectedSubcategory={selectedSubcategory}
+            onSelectSubcategory={setSelectedSubcategory}
             selectedMaterial={selectedMaterial}
             onSelectMaterial={toggleMaterial}
-            selectedOpacity={selectedOpacity}
-            onSelectOpacity={toggleOpacity}
             priceRange={priceRange}
             onPriceChange={setPriceRange}
             onResetFilters={resetAllFilters}
@@ -134,7 +215,7 @@ export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
                   "No textiles match the current filter selection"
                 </p>
                 <p className="text-xs text-[#739376]">
-                  Try widening your price range or clearing material filters.
+                  Try clearing subcategory filters or widening your price range.
                 </p>
                 <button
                   onClick={resetAllFilters}
@@ -179,4 +260,3 @@ export const ShopPage = ({ onNavigate, initialCategory = 'all' }) => {
     </div>
   );
 };
-

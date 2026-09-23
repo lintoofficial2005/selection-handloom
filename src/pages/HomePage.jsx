@@ -1,62 +1,56 @@
 import React from 'react';
 import { HeroSection } from '../components/home/HeroSection';
-import { HeritageIntro } from '../components/home/HeritageIntro';
 import { CategoryBento } from '../components/home/CategoryBento';
-import { FeaturedGrid } from '../components/home/FeaturedGrid';
-import { TextileExperience } from '../components/home/TextileExperience';
+import { NewArrivals } from '../components/home/NewArrivals';
 import { CurtainSpotlight } from '../components/home/CurtainSpotlight';
-import { BlindsShowcase } from '../components/home/BlindsShowcase';
 import { HomeLinenShowcase } from '../components/home/HomeLinenShowcase';
+import { TextileExperience } from '../components/home/TextileExperience';
 import { SuitsFabricsShowcase } from '../components/home/SuitsFabricsShowcase';
+import { HeritageIntro } from '../components/home/HeritageIntro';
 import { HeritageTimeline } from '../components/home/HeritageTimeline';
-import { WhySelection } from '../components/home/WhySelection';
 import { StoreExperience } from '../components/home/StoreExperience';
+import { WhySelection } from '../components/home/WhySelection';
 import { VisualJournal } from '../components/home/VisualJournal';
 import { Newsletter } from '../components/home/Newsletter';
 
 export const HomePage = ({ onNavigate }) => {
   return (
     <div className="animate-in fade-in duration-500">
-      {/* SECTION 1: HERO */}
+      {/* 1. HERO */}
       <HeroSection onNavigate={onNavigate} />
 
-      {/* SECTION 2: HERITAGE INTRO */}
-      <HeritageIntro onNavigate={onNavigate} />
-
-      {/* SECTION 3: SHOP BY CATEGORY */}
+      {/* 2. SHOP BY CATEGORY ("Explore Our Collections") */}
       <CategoryBento onNavigate={onNavigate} />
 
-      {/* SECTION 4: FEATURED MASTERPIECES */}
-      <FeaturedGrid onNavigate={onNavigate} />
+      {/* 3. NEW ARRIVALS */}
+      <NewArrivals onNavigate={onNavigate} />
 
-      {/* SECTION 5: TEXTILE EXPERIENCE */}
-      <TextileExperience />
-
-      {/* SECTION 6: CURTAIN SPOTLIGHT */}
+      {/* 4. HOME FURNISHINGS: CURTAINS (Stitched vs Unstitched) */}
       <CurtainSpotlight onNavigate={onNavigate} />
 
-      {/* SECTION 7: BLINDS SHOWCASE */}
-      <BlindsShowcase onNavigate={onNavigate} />
-
-      {/* SECTION 8: HOME LINEN */}
+      {/* 5. HOME FURNISHINGS: HEIRLOOM BEDDING & SOFT FURNISHINGS */}
       <HomeLinenShowcase onNavigate={onNavigate} />
 
-      {/* SECTION 9: SUITS & FABRICS */}
+      {/* 6. COLOURFUL TEXTILE / BRAND STORY */}
+      <TextileExperience />
+
+      {/* 7. LADIES' SUITS (UNSTITCHED SILKS & FABRICS) */}
       <SuitsFabricsShowcase onNavigate={onNavigate} />
 
-      {/* SECTION 10: 75-YEAR HERITAGE TIMELINE */}
+      {/* 8. HERITAGE INTRO & 75-YEAR TIMELINE */}
+      <HeritageIntro onNavigate={onNavigate} />
       <HeritageTimeline onNavigate={onNavigate} />
 
-      {/* SECTION 11: WHY SELECTION HANDLOOM */}
+      {/* 9. WHY SELECTION HANDLOOM */}
       <WhySelection />
 
-      {/* SECTION 12: MEERUT STORE EXPERIENCE */}
+      {/* 10. PHYSICAL STORE EXPERIENCE */}
       <StoreExperience onNavigate={onNavigate} />
 
-      {/* SECTION 13: VISUAL JOURNAL */}
+      {/* 11. VISUAL JOURNAL */}
       <VisualJournal />
 
-      {/* SECTION 14: NEWSLETTER */}
+      {/* 12. NEWSLETTER */}
       <Newsletter />
     </div>
   );

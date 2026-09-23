@@ -15,7 +15,8 @@ import {
   Ruler, 
   Check, 
   ChevronRight, 
-  Clock
+  Clock,
+  Sparkles
 } from 'lucide-react';
 
 export const ProductDetailPage = ({ productId, onNavigate }) => {
@@ -37,6 +38,15 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
   const activeDimObj = product.dimensions?.find(d => d.label === selectedDim);
   const multiplier = activeDimObj ? activeDimObj.priceMultiplier : 1;
   const currentPrice = Math.round(product.price * multiplier);
+
+  const getCategorySlug = (catName) => {
+    if (catName === 'Bedding') return 'category-bedding';
+    if (catName === 'Curtains') return 'category-curtains';
+    if (catName === 'Bath & Linen') return 'category-bath-linen';
+    if (catName === 'Soft Furnishings') return 'category-soft-furnishings';
+    if (catName === "Ladies' Suits") return 'category-suits';
+    return 'shop';
+  };
 
   const handleAddToCart = () => {
     addToCart(product, {
@@ -72,9 +82,20 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
             Home
           </button>
           <ChevronRight className="w-3.5 h-3.5 opacity-50" />
-          <button onClick={() => onNavigate(`category-${product.category}`)} className="hover:text-[#243528] cursor-pointer">
-            {product.categoryName}
+          <button onClick={() => onNavigate(getCategorySlug(product.category))} className="hover:text-[#243528] cursor-pointer font-medium">
+            {product.category}
           </button>
+          {product.subcategory && (
+            <>
+              <ChevronRight className="w-3.5 h-3.5 opacity-50" />
+              <button 
+                onClick={() => onNavigate(`${getCategorySlug(product.category)}?sub=${encodeURIComponent(product.subcategory)}`)}
+                className="hover:text-[#243528] cursor-pointer text-[#739376]"
+              >
+                {product.subcategory}
+              </button>
+            </>
+          )}
           <ChevronRight className="w-3.5 h-3.5 opacity-50" />
           <span className="text-[#243528] font-semibold truncate max-w-[140px] sm:max-w-xs">{product.name}</span>
         </nav>
@@ -123,7 +144,7 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
               )}
             </div>
 
-            {/* THUMBNAILS CAROUSEL + MOBILE DOTS */}
+            {/* THUMBNAILS CAROUSEL */}
             <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3 overflow-x-auto pb-1">
               {product.images.map((img, idx) => (
                 <button
@@ -162,9 +183,16 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
             
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-semibold">
-                  {product.categoryName} • ESTD. 1950
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#5B7A5E] font-bold">
+                    {product.category}
+                  </span>
+                  {product.subcategory && (
+                    <span className="text-[10px] bg-[#E6EDE6] text-[#243528] px-2 py-0.5 rounded-full font-semibold">
+                      {product.subcategory}
+                    </span>
+                  )}
+                </div>
                 <button
                   onClick={() => {
                     toggleWishlist(product.id);
@@ -174,7 +202,7 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
                   title="Save to Wishlist"
                   aria-label="Wishlist"
                 >
-                  <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#739376] text-[#739376]' : ''}`} />
+                  <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-[#C86D51] text-[#C86D51]' : ''}`} />
                 </button>
               </div>
 
@@ -196,9 +224,11 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
                     ₹{(product.originalPrice * multiplier).toFixed(0).toLocaleString('en-IN')}
                   </span>
                 )}
-                <span className="text-[10px] sm:text-xs bg-[#E6EDE6] text-[#49634C] px-2 py-0.5 rounded-full font-semibold">
-                  Jubilee Edition
-                </span>
+                {product.isNew && (
+                  <span className="text-[10px] sm:text-xs bg-[#FBEBE6] text-[#C86D51] border border-[#C86D51]/30 px-2 py-0.5 rounded-full font-bold">
+                    ✨ New Arrival
+                  </span>
+                )}
               </div>
             </div>
 
@@ -271,7 +301,7 @@ export const ProductDetailPage = ({ productId, onNavigate }) => {
             {product.headerTypes && product.headerTypes.length > 0 && (
               <div>
                 <span className="text-xs uppercase tracking-wider text-[#555C56] font-semibold block mb-2">
-                  Header Style / Finish:
+                  Header Style / Pack Details:
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {product.headerTypes.map((ht) => (

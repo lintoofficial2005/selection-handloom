@@ -4,18 +4,18 @@ import { X } from 'lucide-react';
 export const ActiveFilters = ({
   selectedCategory,
   onClearCategory,
+  selectedSubcategory,
+  onClearSubcategory,
   selectedMaterial,
   onRemoveMaterial,
-  selectedOpacity,
-  onRemoveOpacity,
   priceRange,
   onResetPrice,
   onClearAll
 }) => {
   const hasActiveFilters =
-    selectedCategory !== 'all' ||
+    (selectedCategory && selectedCategory !== 'all') ||
+    (selectedSubcategory && selectedSubcategory !== 'all') ||
     selectedMaterial.length > 0 ||
-    selectedOpacity.length > 0 ||
     priceRange < 12000;
 
   if (!hasActiveFilters) return null;
@@ -26,10 +26,19 @@ export const ActiveFilters = ({
         Active Filters:
       </span>
 
-      {selectedCategory !== 'all' && (
+      {selectedCategory && selectedCategory !== 'all' && (
         <span className="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full bg-[#E6EDE6] text-[#243528] font-medium border border-[#D0DDD1]">
-          <span>Collection: {selectedCategory}</span>
+          <span>Category: {selectedCategory}</span>
           <button onClick={onClearCategory} className="hover:text-red-600 cursor-pointer">
+            <X className="w-3 h-3" />
+          </button>
+        </span>
+      )}
+
+      {selectedSubcategory && selectedSubcategory !== 'all' && (
+        <span className="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full bg-[#E6EDE6] text-[#243528] font-medium border border-[#D0DDD1]">
+          <span>Type: {selectedSubcategory}</span>
+          <button onClick={onClearSubcategory} className="hover:text-red-600 cursor-pointer">
             <X className="w-3 h-3" />
           </button>
         </span>
@@ -42,18 +51,6 @@ export const ActiveFilters = ({
         >
           <span>{m}</span>
           <button onClick={() => onRemoveMaterial(m)} className="hover:text-red-600 cursor-pointer">
-            <X className="w-3 h-3" />
-          </button>
-        </span>
-      ))}
-
-      {selectedOpacity.map((op) => (
-        <span
-          key={op}
-          className="inline-flex items-center gap-1 text-xs px-3 py-1 rounded-full bg-[#E6EDE6] text-[#243528] font-medium border border-[#D0DDD1]"
-        >
-          <span>{op}</span>
-          <button onClick={() => onRemoveOpacity(op)} className="hover:text-red-600 cursor-pointer">
             <X className="w-3 h-3" />
           </button>
         </span>

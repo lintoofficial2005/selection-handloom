@@ -41,7 +41,7 @@ export const Footer = ({ onNavigate }) => {
               The Heritage Atelier
             </h4>
             <p className="text-xs sm:text-sm text-[#FAF7F2]/70 leading-relaxed font-sans pr-0 sm:pr-6">
-              Founded in Meerut in 1950, Selection Handloom has dressed generations of North Indian homes with master-woven draperies, architectural blinds, pure linen bedcover sets, and heirloom suiting fabrics.
+              Founded in Meerut in 1950, Selection Handloom has dressed generations of Indian homes with master-woven draperies, heirloom bedding, bath linens, soft furnishings, and unstitched silks.
             </p>
             <div className="flex items-center gap-2.5 pt-1 text-[#AEC4B0]">
               <ShieldCheck className="w-5 h-5 text-[#8DA98F] shrink-0" />
@@ -51,59 +51,64 @@ export const Footer = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Col 2: Shop Collections */}
+          {/* Col 2: Shop Departments */}
           <div className="space-y-2.5 sm:space-y-3">
             <h4 className="text-xs uppercase tracking-[0.25em] text-[#AEC4B0] font-semibold">
-              Collections
+              Home Furnishings
             </h4>
             <ul className="space-y-1 text-xs sm:text-sm text-[#FAF7F2]/75">
               <li>
+                <button onClick={() => onNavigate('category-bedding')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
+                  Bedding &amp; Dohars
+                </button>
+              </li>
+              <li>
                 <button onClick={() => onNavigate('category-curtains')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  Curtains &amp; Drapes
+                  Curtains (Stitched / Unstitched)
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('category-blinds')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  Timber &amp; Roman Blinds
+                <button onClick={() => onNavigate('category-bath-linen')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
+                  Bath &amp; Linen
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('category-home-linen')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  Pure Home Linen
+                <button onClick={() => onNavigate('category-soft-furnishings')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
+                  Soft Furnishings &amp; Cushions
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('category-suits')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  Suiting &amp; Raw Silk
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('shop')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  All Products
+                <button onClick={() => onNavigate('category-home-furnishings')} className="py-1 inline-block text-[#8DA98F] font-semibold hover:underline cursor-pointer">
+                  All Home Furnishings →
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Care & Heritage */}
+          {/* Col 3: Ladies' Suits & Discoveries */}
           <div className="space-y-2.5 sm:space-y-3">
             <h4 className="text-xs uppercase tracking-[0.25em] text-[#AEC4B0] font-semibold">
-              Care &amp; Heritage
+              Suits &amp; Stories
             </h4>
             <ul className="space-y-1 text-xs sm:text-sm text-[#FAF7F2]/75">
               <li>
+                <button onClick={() => onNavigate('category-suits')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
+                  Ladies' Suits (Unstitched)
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('new-arrivals')} className="py-1 inline-block text-[#C86D51] font-semibold hover:underline cursor-pointer">
+                  ✨ New Arrivals
+                </button>
+              </li>
+              <li>
                 <button onClick={() => onNavigate('about')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  75-Year Story
+                  75-Year Heritage Story
                 </button>
               </li>
               <li>
                 <button onClick={() => onNavigate('store')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  Meerut Showroom
-                </button>
-              </li>
-              <li>
-                <button onClick={() => onNavigate('account')} className="py-1 inline-block hover:text-[#AEC4B0] transition-colors cursor-pointer">
-                  Track Your Order
+                  Meerut Flagship Showroom
                 </button>
               </li>
               <li>

@@ -1,95 +1,129 @@
-export const categories = [
+export const mainCategories = [
   {
-    "id": "curtains",
-    "name": "Curtains",
-    "subtitle": "Drapery of quiet distinction",
-    "description": "Bespoke handwoven sheers, rich botanical jacquards, and insulated velvet draperies crafted to frame light with poetic grace.",
-    "count": "34 Styles",
-    "startingPrice": "₹2,499",
-    "heroImage": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
-    "textureImage": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
-    "palette": [
-      "#8DA98F",
-      "#FAF5EE",
-      "#5A6F57",
-      "#163638"
-    ],
-    "subcategories": [
-      "Botanical Linens",
-      "Heritage Jacquards",
-      "Gossamer Sheers",
-      "Thermal Velvet",
-      "Motorized Drapery"
+    id: 'home-furnishings',
+    name: 'Home Furnishings',
+    slug: 'category-home-furnishings',
+    description: 'Curated draperies, luxury bedding, bath linens, and artisanal soft furnishings for mindful living spaces.',
+    categories: [
+      {
+        id: 'bedding',
+        name: 'Bedding',
+        slug: 'category-bedding',
+        description: 'Heirloom bedsheets, deep waffle bed covers, reversible dohars, and pure cotton diwan sets.',
+        image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+        subcategories: [
+          'Bedsheets',
+          'Bed Covers',
+          'Blankets',
+          'Quilts',
+          'Comforters',
+          'Dohars',
+          'Diwan Sets',
+          'Quilt Covers'
+        ]
+      },
+      {
+        id: 'curtains',
+        name: 'Curtains',
+        slug: 'category-curtains',
+        description: 'Architectural window treatments available in ready-to-hang Stitched panels and Unstitched / Fabric lengths.',
+        image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
+        subcategories: [
+          'Stitched',
+          'Unstitched / Fabric'
+        ]
+      },
+      {
+        id: 'bath-linen',
+        name: 'Bath & Linen',
+        slug: 'category-bath-linen',
+        description: 'High-absorbency zero-twist cotton towels and European pre-washed flax bathrobes.',
+        image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80',
+        subcategories: [
+          'Towels',
+          'Bathrobes'
+        ]
+      },
+      {
+        id: 'soft-furnishings',
+        name: 'Soft Furnishings',
+        slug: 'category-soft-furnishings',
+        description: 'Artisanal hand-block cushions, rich sofa covers, embroidered pillow covers, and bolster sets.',
+        image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80',
+        subcategories: [
+          'Sofa Covers',
+          'Cushion Covers',
+          'Cushions',
+          'Pillow Covers',
+          'Bolsters'
+        ]
+      }
     ]
   },
   {
-    "id": "blinds",
-    "name": "Blinds",
-    "subtitle": "Architectural precision & light play",
-    "description": "Precision-crafted timber venetian slats, woven river-grass roman blinds, and modern zebra cassettes for effortless ambient control.",
-    "count": "22 Systems",
-    "startingPrice": "₹3,890",
-    "heroImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-    "textureImage": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80",
-    "palette": [
-      "#A37748",
-      "#637365",
-      "#DED3C4",
-      "#3D2F24"
-    ],
-    "subcategories": [
-      "Timber Venetian",
-      "Natural Jute Roman",
-      "Dual Sheer Zebra",
-      "Motorized Honeycomb",
-      "Bamboo Roller"
-    ]
-  },
-  {
-    "id": "home-linen",
-    "name": "Home Linen",
-    "subtitle": "Tactile sanctuaries for everyday living",
-    "description": "Heirloom waffle bedcovers, hand-block printed cushion sets, tussar zari runners, and cloud-soft pure cashmere throws.",
-    "count": "48 Pieces",
-    "startingPrice": "₹2,199",
-    "heroImage": "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=1200&q=80",
-    "textureImage": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80",
-    "palette": [
-      "#7A8C74",
-      "#DDD2C1",
-      "#CBB285",
-      "#2A3C4A"
-    ],
-    "subcategories": [
-      "Hand-Block Cushions",
-      "Flax Linen Bedcovers",
-      "Zari Table Runners",
-      "Pashmina Throws",
-      "Organic Muslin Quilts"
-    ]
-  },
-  {
-    "id": "suits",
-    "name": "Suits & Fabrics",
-    "subtitle": "Masterhouse weaves for sartorial elegance",
-    "description": "Pure Himalayan merino cashmere wool, hand-reeled Matka raw silk, and Super 140s Italian worsted fabrics for bespoke tailoring.",
-    "count": "28 Weaves",
-    "startingPrice": "₹5,200",
-    "heroImage": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=1200&q=80",
-    "textureImage": "https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=800&q=80",
-    "palette": [
-      "#4B5B49",
-      "#1C3435",
-      "#F0E9DA",
-      "#B8976C"
-    ],
-    "subcategories": [
-      "Merino Cashmere Suiting",
-      "Raw Matka Silk",
-      "Khadi Linen Blends",
-      "Super 140s Sharkskin",
-      "Bespoke Bandhgala Fabric"
+    id: 'ladies-suits',
+    name: "Ladies' Suits",
+    slug: 'category-suits',
+    description: 'Heritage unstitched suit cuts in pure Matka raw silk, Chanderi zari, modal satin, and fine handloom cotton.',
+    categories: [
+      {
+        id: 'suits-unstitched',
+        name: 'Unstitched',
+        slug: 'category-suits',
+        description: 'Masterhouse unstitched fabric lengths (3.0m to 4.5m) crafted for celebratory bandhgalas, kurtas, and festive sets.',
+        image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+        subcategories: [
+          'Unstitched'
+        ]
+      }
     ]
   }
 ];
-export default categories;
+
+export const exploreCategories = [
+  {
+    id: 'bedding',
+    name: 'Bedding',
+    route: 'category-bedding',
+    descriptor: 'Bedsheets, Dohars, Quilts & Diwan Sets',
+    image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+    tag: 'Sanctuary Essentials',
+    accentColor: '#C86D51' // Terracotta accent
+  },
+  {
+    id: 'curtains',
+    name: 'Curtains',
+    route: 'category-curtains',
+    descriptor: 'Stitched Drapes & Unstitched Fabric Lengths',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
+    tag: 'Custom Drape',
+    accentColor: '#739376' // Sage
+  },
+  {
+    id: 'bath-linen',
+    name: 'Bath & Linen',
+    route: 'category-bath-linen',
+    descriptor: 'Zero-Twist Towels & Flax Bathrobes',
+    image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80',
+    tag: 'Pure Cotton & Flax',
+    accentColor: '#3A6B7C' // Peacock Blue / Teal
+  },
+  {
+    id: 'soft-furnishings',
+    name: 'Soft Furnishings',
+    route: 'category-soft-furnishings',
+    descriptor: 'Sofa Covers, Cushions, Pillows & Bolsters',
+    image: 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?auto=format&fit=crop&w=800&q=80',
+    tag: 'Hand-Block & Zari',
+    accentColor: '#D99B26' // Mustard / Turmeric
+  },
+  {
+    id: 'ladies-suits',
+    name: "Ladies' Suits",
+    route: 'category-suits',
+    descriptor: 'Unstitched Silk, Chanderi & Cashmere Cuts',
+    image: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=800&q=80',
+    tag: 'Heirloom Weaves',
+    accentColor: '#B25353' // Coral / Rose
+  }
+];
